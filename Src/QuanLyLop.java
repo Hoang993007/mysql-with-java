@@ -8,12 +8,6 @@ import db_choose.*;
 import check_exists.*;
 import menu.*;
 
-
-//HAVE NOT TESTED YET
-
-
-
-
 public class QuanLyLop{
     public void exec(){
 //***********************************************************
