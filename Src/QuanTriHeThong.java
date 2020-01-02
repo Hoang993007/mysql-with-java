@@ -25,8 +25,8 @@ public class QuanTriHeThong{
 	    String sql=new String();
 	    Scanner scan=new Scanner(System.in);
 	    String SQLFileName=new String();
-	    String path_to_store_backup_file="BackUp_sqlFile/";
-	    String path_to_take_backup_file="BackUp_sqlFile/";
+	    String path_to_store_backup_file="../BackUp_sqlFile/";
+	    String path_to_take_backup_file="../BackUp_sqlFile/";
 	    
 	    System.out.println();
 	    int choice;
@@ -49,7 +49,7 @@ public class QuanTriHeThong{
 			    } else {
 				System.out.println("Could not take mysql backup");
 			    }
-
+                            scan.nextLine();
 			    break;
 			    
 			case 2://read and execute command in sql file
@@ -92,7 +92,7 @@ public class QuanTriHeThong{
 			    //"mysql -u "+DB_CHOOSE.USER+" --password="+DB_CHOOSE.PASS+" "+DB_CHOOSE.DBNAME+" < BackUp.sql";
 			    
                             try{
-				String[] executeCmd2= new String[]{"/bin/sh", "-c", "mysql -u " + DB_CHOOSE.USER+ " -p"+DB_CHOOSE.PASS+" "+ DB_CHOOSE.DBNAME+" < BackUpFile/"+SQLFileName+".sql"};
+				String[] executeCmd2= new String[]{"/bin/sh", "-c", "mysql -u " + DB_CHOOSE.USER+ " -p"+DB_CHOOSE.PASS+" "+ DB_CHOOSE.DBNAME+" < "+path_to_take_backup_file+SQLFileName+".sql"};
 				//Note when write code: the password must wirte right next to -p without space. "-p123" is correct and "-p123" is false
 			
 				System.out.println(executeCmd2[2]);
@@ -108,7 +108,7 @@ public class QuanTriHeThong{
 				{
 				    e.printStackTrace();
 				}
-			    
+			    scan.nextLine();
 			    break;
 			case 3:
 			    System.out.println("Quit");

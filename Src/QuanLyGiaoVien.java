@@ -66,7 +66,7 @@ public class QuanLyGiaoVien{
 					stmt.executeUpdate(sql);
 				    }
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 			    }while(check.equals("y"));
 			    break;
@@ -86,12 +86,12 @@ public class QuanLyGiaoVien{
 				    }
 				else{//exitst
 				    //start to update
-				    System.out.print("Do you want to update ma giao vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ma giao vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nMa giao vien: ");
+					    System.out.print("Ma giao vien: ");
 					    MaGV=scan.nextLine();
 					    
 					    if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==1)
@@ -105,34 +105,34 @@ public class QuanLyGiaoVien{
 					    }
 					}
 				    
-				    System.out.print("Do you want to update ho giao vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ho giao vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nHo giao vien: ");
+					    System.out.print("Ho giao vien: ");
 					    HoGV=scan.nextLine();
 					    sql="update GiaoVien set HoGV='"+HoGV+"' where MaGV='"+UDMaGV+"'";
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update ten giao vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ten giao vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nTen giao vien: ");
+					    System.out.print("Ten giao vien: ");
 					    TenGV=scan.nextLine();
 					    sql="update GiaoVien set TenGV='"+TenGV+"' where MaGV='"+UDMaGV+"'";
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update don vi? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate don vi? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nDon vi: ");
+					    System.out.print("Don vi: ");
 					    DonVi=scan.nextLine();
 					    sql="update GiaoVien set DonVi='"+DonVi+"' where MaGV='"+UDMaGV+"'";
 					    stmt.executeUpdate(sql);
@@ -140,7 +140,8 @@ public class QuanLyGiaoVien{
 				    
 				    sql="select * from GiaoVien where MaGV='"+UDMaGV+"'";
 				    ResultSet rs=stmt.executeQuery(sql);
-				    
+
+				    System.out.println();
 				    while(rs.next()){
 				    //Retrieve by column name
 				    System.out.print("MaGV: "+rs.getString("MaGV"));
@@ -151,7 +152,7 @@ public class QuanLyGiaoVien{
 				    rs.close();
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -169,11 +170,12 @@ public class QuanLyGiaoVien{
 			    while(rs.next()){
 				    //Retrieve by column name
 				    System.out.print("MaGV: "+rs.getString("MaGV"));
-				    System.out.print(", HoGV: "+rs.getString("TenGV"));
-				    System.out.print(", TenGV: "+rs.getString("HoGV"));
+				    System.out.print(", TenGV: "+rs.getString("TenGV"));
+				    System.out.print(", HoGV: "+rs.getString("HoGV"));
 				    System.out.println(", DonVi: "+ rs.getString("DonVi"));
 
 			    }
+			    scan.nextLine();
 			    rs.close();
 			    break;
 			    
@@ -183,81 +185,82 @@ public class QuanLyGiaoVien{
 			    System.out.println();
 			    
 			    do{
-				String sql1="select * from GiaoVien where ";
-				
+				String sql1;
+				sql="select * from GiaoVien where ";
+				sql1=sql;
 				count=0;
 				
-				System.out.print("Do you want to use Ma giao vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ma giao vien to search? (y/n): ");
 				check=scan.nextLine();
 
 				if(check.equals("y"))
 				    {
-					System.out.print("\nMa giao vien: ");
+					System.out.print("Ma giao vien: ");
 					MaGV=scan.nextLine();
 					sql=sql+"MaGV='"+MaGV+"' ";
 					count=count+1;
 				    }
 				
-				System.out.print("Do you want to use Ten giao vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ten giao vien to search? (y/n): ");
 				check=scan.nextLine();
 
 				if(check.equals("y"))
 				    {
-					System.out.print("\nTen giao vien: ");
+					System.out.print("Ten giao vien: ");
 					TenGV=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"TenGV='"+TenGV+"' ";
 				    }
 				
-				System.out.print("Do you want to use Ho giao vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ho giao vien to search? (y/n): ");
 				check=scan.nextLine();
-
+				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nHo giao vien: ");
+					System.out.print("Ho giao vien: ");
 					HoGV=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"HoGV='"+HoGV+"' ";
 				    }
 				
-				System.out.print("Do you want to use Don vi to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Don vi to search? (y/n): ");
 				check=scan.nextLine();
-
+				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nDon vi: ");
+					System.out.print("Don vi: ");
 					DonVi=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"DonVi='"+DonVi+"' ";
 				    }
-			count=0;	
-		     if(!sql.equals(sql1)){
-				rs=stmt.executeQuery(sql);			
-				
 
-				while(rs.next()){
-				    count=count+1;
-				    //Retrieve by column name
-				    System.out.print("MaGV: "+rs.getString("MaGV"));
-				    System.out.print(", HoGV: "+rs.getString("TenGV"));
-				    System.out.print(", TenGV: "+rs.getString("HoGV"));
-				    System.out.println(", DonVi: "+ rs.getString("DonVi"));
-				}
-				rs.close();
+				count=0;	
+				if(!sql.equals(sql1)){
+				    rs=stmt.executeQuery(sql);
+				    System.out.println();
+				    while(rs.next()){
+					count=count+1;
+					//Retrieve by column name
+					System.out.print("MaGV: "+rs.getString("MaGV"));
+					System.out.print(", TenGV: "+rs.getString("TenGV"));
+					System.out.print(", HoGV: "+rs.getString("HoGV"));
+					System.out.println(", DonVi: "+ rs.getString("DonVi"));
+				    }
+				    rs.close();
 				}
 				if(count==0){
-				    System.out.println("*****************\nNo data\n*****************");
+				    System.out.println("\n*****************\nNo data\n*****************");
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
 			    break;
 			case 5:
 			    System.out.println("Quit");
-		System.out.println("**************************************");
-				System.out.println();
+			    System.out.println("**************************************");
+			    System.out.println();
 			    break;
 			}
 		}while(choice!=5);

@@ -88,15 +88,14 @@ public class QuanLyLop{
 				    }
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
 			    break;
 			    
 			case 2:
-			    System.out.println("Sửa đổi thông tin lớp");
-			    System.out.println();
+			    System.out.println("Sửa đổi thông tin lớp\n");
 			    
 			    do{
 				System.out.print("Ma lop need to be updated: ");
@@ -104,14 +103,13 @@ public class QuanLyLop{
 				
 				//check if exists
 				if(new CheckExists().checkExists("Lop","MaLop",UDMaLop)==0){
-				    System.out.println("The record doesn't exitst");
-				    System.out.println();
+				    System.out.println("The record doesn't exitst\n");
 				}
 				else{//exitst
 				    //start to update
-				    System.out.print("Do you want to update ma lop? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ma lop? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Ma lop: ");
@@ -128,9 +126,9 @@ public class QuanLyLop{
 					    }
 					}
 				    
-				    System.out.print("Do you want to update ma mon hoc? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ma mon hoc? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Ma mon hoc: ");
@@ -145,9 +143,9 @@ public class QuanLyLop{
 					    }
 					}
 				    
-				    System.out.print("Do you want to update nam hoc? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate nam hoc? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Nam hoc (xxxx-xxxx): ");
@@ -156,9 +154,9 @@ public class QuanLyLop{
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update hoc ky? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate hoc ky? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Hoc ky: ");
@@ -168,17 +166,16 @@ public class QuanLyLop{
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update giao vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate giao vien? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Ma giao vien: ");
 					    MaGV=scan.nextLine();
 					    
 					    if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==0){
-						System.out.println();
-						System.out.println("The teacher doesn't exits");	
+						System.out.println("\nThe teacher doesn't exits");	
 					    }
 					    else {
 						sql="update Lop set MaGV='"+MaGV+"'  where MaLop='"+UDMaLop+"'";//notice the space " where
@@ -188,7 +185,8 @@ public class QuanLyLop{
 				    
 				    sql="select * from Lop where MaLop='"+UDMaLop+"'";
 				    ResultSet rs=stmt.executeQuery(sql);
-				    
+
+				    System.out.println();
 				    while(rs.next()){
 	//Retrieve by column name
 				System.out.print("MaLop: "+rs.getString("MaLop"));
@@ -200,9 +198,8 @@ public class QuanLyLop{
 				    rs.close();
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
-				System.out.println();
 			    }while(check.equals("y"));
 			    break;
 			    
@@ -232,32 +229,29 @@ public class QuanLyLop{
 					    
 					    //check if exists
 					    if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==0){
-						System.out.println("\nThe SinhVien doesn't exists");
+						System.out.println("The SinhVien doesn't exists");
 					    }
 					    else
 						{
 						    //check if exists
 						    if(new CheckExists().checkExists("SinhVienLop","MaSV",MaSV)==1){
-                                                        System.out.println();
-							System.out.println("The record already exists");
+							System.out.println("\nThe record already exists");
 							
 						    }
 						    else {
-							check2=scan.nextLine();//??????????????????????????????????
-							
 							sql="insert into SinhVienLop (MaSV,MaLop)"
 							    +"values('"+MaSV+"','"+ISClass+"')";
 							stmt.executeUpdate(sql);
 						    }
 						}
 					    
-					    System.out.print("Do you want to continue insert studen? (Type 'y' or 'n'): ");
+					    System.out.print("\nDo you want to continue insert studen? (y/n): ");
 					    check2=scan.nextLine();
 					    System.out.println();
 					}while(check2.equals("y"));
 				}
 				
-				System.out.print("Do you want to continue with new class? (Type 'y' or 'n'): ");
+				System.out.print("\nDo you want to continue with new class? (y/n): ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -298,13 +292,13 @@ public class QuanLyLop{
 						    stmt.executeUpdate(sql);
 						}
 					    
-					    System.out.print("Do you want to continue delete studen from this class? (Type 'y' or 'n'): ");
+					    System.out.print("\nDo you want to continue delete studen from this class? (y/n): ");
 					    check2=scan.nextLine();
 					    System.out.println();
 					}while(check2.equals("y"));
 				}
 				
-				System.out.print("Do you want to continue with new class? (Type 'y' or 'n'): ");
+				System.out.print("\nDo you want to continue with new class? (y/n): ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -327,7 +321,7 @@ public class QuanLyLop{
 				    stmt.executeUpdate(sql);	   
 				}
 				
-				System.out.print("Do you want to continue with new class? (Type 'y' or 'n'): ");
+				System.out.print("\nDo you want to continue with new class? (y/n): ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -347,7 +341,7 @@ public class QuanLyLop{
 				System.out.print(", NamHoc: "+rs.getString("NamHoc"));
 				System.out.print(", HocKy: "+rs.getInt("HocKy"));
 				System.out.println(", MaGV: "+rs.getString("MaGV"));
-			    }
+			    }scan.nextLine();
 			    rs.close();
 			    break;
 			case 7:

@@ -19,7 +19,7 @@ public class Menu{
     public static String[] menuQuanTriHeThong=new String[]{"Quan tri he thong","Chọn 1: Sao lưu dữ liệu","Chọn 2: Phục hồi dữ liệu","Chọn 3: Quit"};
     
     public int getChoice(String[] menu){
-	
+	System.out.print("\033[H\033[2J");//clear terminal
 	printMenu(menu);
 	int option=menu.length;
 	

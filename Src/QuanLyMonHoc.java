@@ -43,7 +43,6 @@ stmt=conn.createStatement();
 				
 				//check if exists
 				if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==1){
-				    System.out.println();
 				    System.out.println("The record already exists");
 				}else{
 					System.out.print("Ten mon hoc: ");
@@ -59,7 +58,7 @@ stmt=conn.createStatement();
 				    }
 				
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -76,23 +75,21 @@ stmt=conn.createStatement();
 				
 				//check if exists
 				if(new CheckExists().checkExists("MonHoc","MaMH",UDMaMH)==0){
-					System.out.println("The record doesn't exists");
-					System.out.println();
+					System.out.println("The record doesn't exists\n");
 				    }
 				else{//exitst
 				    //start to update
 				    
-				    System.out.print("Do you want to update ma mon hoc? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ma mon hoc? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Ma mon hoc: ");
 					    MaMH=scan.nextLine();
 					    if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==1)
 						{
-						    System.out.println("The record already exists");
-						    System.out.println();
+						    System.out.println("The record already exists\n");
 						}
 					    else{//exitst
 						sql="update MonHoc set MaMH='"+MaMH+"'  where MaMH='"+UDMaMH+"'";//notice the space " where
@@ -101,9 +98,9 @@ stmt=conn.createStatement();
 					    }
 					}
 				    
-				    System.out.print("Do you want to update ten mon hoc? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ten mon hoc? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("Ten mon hoc: ");
@@ -112,9 +109,9 @@ stmt=conn.createStatement();
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update so tin chi? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate so tin chi? (y/n): ");
 				    check=scan.nextLine();
-				    System.out.println();
+
 				    if(check.equals("y"))
 					{
 					    System.out.print("So tin chi: ");
@@ -127,17 +124,17 @@ stmt=conn.createStatement();
 				    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
 				    ResultSet rs=stmt.executeQuery(sql);
 				    
-				    //STEP5: Extract data from result set
+                                    System.out.println();
 				    while(rs.next()){
-			//Retrieve by column name
-				System.out.print("MaMH: "+rs.getString("MaMH"));
-				System.out.print(", TenMH: "+rs.getString("TenMH"));
-				System.out.println(", SoTC: "+rs.getInt("SoTC"));
+					//Retrieve by column name
+					System.out.print("MaMH: "+rs.getString("MaMH"));
+					System.out.print(", TenMH: "+rs.getString("TenMH"));
+					System.out.println(", SoTC: "+rs.getInt("SoTC"));
 				    }
 				    rs.close();
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -156,7 +153,7 @@ stmt=conn.createStatement();
 				System.out.print("MaMH: "+rs.getString("MaMH"));
 				System.out.print(", TenMH: "+rs.getString("TenMH"));
 				System.out.println(", SoTC: "+rs.getInt("SoTC"));
-			    }
+			    }scan.nextLine();
 			    rs.close();
 stmt.execute("--");
 			    break;

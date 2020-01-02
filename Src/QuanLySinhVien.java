@@ -41,10 +41,10 @@ public class QuanLySinhVien{
 		    switch(choice)
 			{
 			case 1:
-			    System.out.println("Thêm hồ sơ sinh viên\n");
+			    System.out.println("Thêm hồ sơ sinh viên");
 			    
 			    do{
-				System.out.print("Ma sinh vien: ");
+				System.out.print("\nMa sinh vien: ");
 				MaSV=scan.nextLine();
 				
 				//check if exists
@@ -69,7 +69,7 @@ public class QuanLySinhVien{
 				    }
 				
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 			    }while(check.equals("y"));
 			    break;
@@ -88,15 +88,15 @@ public class QuanLySinhVien{
 				    }
 				else{//exitst
 				    //start to update
-				    System.out.print("Do you want to update ma sinh vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ma sinh vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nMa sinh vien: ");
+					    System.out.print("Ma sinh vien: ");
 					    MaSV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("SinhVien","MaSV",UDMaSV)==1)
+					    if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==1)
 						{
 						    System.out.println("The record already exists");
 						    System.out.println();
@@ -108,45 +108,45 @@ public class QuanLySinhVien{
 					    }
 					}
 				    
-				    System.out.print("Do you want to update ho sinh vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ho sinh vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nHo sinh vien: ");
+					    System.out.print("Ho sinh vien: ");
 					    HoSV=scan.nextLine();
 					    sql="update SinhVien set HoSV='"+HoSV+"' where MaSV='"+UDMaSV+"'";
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update ten sinh vien? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ten sinh vien? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nTen sinh vien: ");
+					    System.out.print("Ten sinh vien: ");
 					    TenSV=scan.nextLine();
 					    sql="update SinhVien set TenSV='"+TenSV+"' where MaSV='"+UDMaSV+"'";
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update ngay sinh? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate ngay sinh? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nNgay sinh: ");
+					    System.out.print("Ngay sinh: ");
 					    NgaySinh=scan.nextLine();
 					    sql="update SinhVien set NgaySinh='"+NgaySinh+"' where MaSV='"+UDMaSV+"'";
 					    stmt.executeUpdate(sql);
 					}
 				    
-				    System.out.print("Do you want to update noi sinh? (Type 'y' or 'n'): ");
+				    System.out.print("\nUpdate noi sinh? (y/n): ");
 				    check=scan.nextLine();
 
 				    if(check.equals("y"))
 					{
-					    System.out.print("\nNoi sinh: ");
+					    System.out.print("Noi sinh: ");
 					    NoiSinh=scan.nextLine();
 					    sql="update SinhVien set NoiSinh='"+NoiSinh+"' where MaSV='"+UDMaSV+"'";
 					    stmt.executeUpdate(sql);
@@ -154,19 +154,20 @@ public class QuanLySinhVien{
 				    
 				    sql="select * from SinhVien where MaSV='"+UDMaSV+"'";
 				    ResultSet rs=stmt.executeQuery(sql);
-				    
+
+				    System.out.println();
 				    while(rs.next()){
 				    //Retrieve by column name
 				    System.out.print("MaSV: "+rs.getString("MaSV"));
-				    System.out.print(", HoSV: "+rs.getString("TenSV"));
-				    System.out.print(", TenSV: "+rs.getString("HoSV"));
+				    System.out.print(", TenSV: "+rs.getString("TenSV"));
+				    System.out.print(", HoSV: "+rs.getString("HoSV"));
 				    System.out.print(", NgaySinh: "+ rs.getString("NgaySinh"));
 				    System.out.println(", NoiSinh: "+ rs.getString("NoiSinh"));
 				    }
 				    rs.close();
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
@@ -183,56 +184,56 @@ public class QuanLySinhVien{
 
 				count=0;
 				
-				System.out.print("Do you want to use Ma sinh vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ma sinh vien to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nMa sinh vien: ");
+					System.out.print("Ma sinh vien: ");
 					MaSV=scan.nextLine();
 					sql=sql+"MaSV='"+MaSV+"' ";
 					count=count+1;
 				    }
 				
-				System.out.print("Do you want to use Ten sinh vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ten sinh vien to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nTen sinh vien: ");
+					System.out.print("Ten sinh vien: ");
 					TenSV=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"TenSV='"+TenSV+"' ";
 				    }
 				
-				System.out.print("Do you want to use Ho sinh vien to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse Ho sinh vien to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nHo sinh vien: ");
+					System.out.print("Ho sinh vien: ");
 					HoSV=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"HoSV='"+HoSV+"' ";
 				    }
 				
-				System.out.print("Do you want to use ngay sinh to search? (Type 'y' or 'n'): ");
+		        	System.out.print("\nUse ngay sinh to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nNgay sinh: ");
+					System.out.print("Ngay sinh: ");
 					NgaySinh=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"NgaySinh='"+NgaySinh+"' ";
 				    }
 				
-				System.out.print("Do you want to use noi sinh to search? (Type 'y' or 'n'): ");
+				System.out.print("\nUse noi sinh to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
 				    {
-					System.out.print("\nNoi sinh: ");
+					System.out.print("Noi sinh: ");
 					NoiSinh=scan.nextLine();
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"NoiSinh='"+NoiSinh+"' ";
@@ -241,7 +242,7 @@ count=0;
 		     if(!sql.equals(sql1)){
 				ResultSet rs=stmt.executeQuery(sql);
 
-                               
+                               	System.out.println();
 				while(rs.next()){
 				    count=count+1;
 				    //Retrieve by column name
@@ -257,7 +258,7 @@ count=0;
 				    System.out.println("*****************\nNo data\n*****************");
 				}
 				
-				System.out.print("Type 'y' to continue, 'n' to exit: ");
+				System.out.print("\n### Type y to continue/n to exit: ");
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
