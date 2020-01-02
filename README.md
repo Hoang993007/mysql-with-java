@@ -1,4 +1,4 @@
-How to run: use terminal
+@How to run: use terminal
 
 ~$ cd Src
 
@@ -9,7 +9,8 @@ How to run: use terminal
 ~$ java -cp .:../used_package/mysql-connector-java-8.0.17.jar quanLy.QuanLy
 
 
-Clear terminal Screen (linux)
+
+@Clear terminal Screen (linux)
 System.out.print("\033[H\033[2J");
 
     'H' means move to top of the screen
