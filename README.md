@@ -1,3 +1,7 @@
+Author: Nguyễn Minh Hoàng
+
+In this project I will use Java 8.0, mySQL and JDBC to connect mySQL and Java to create a simple database for school.
+
 @How to run: use terminal
 
 ~$ cd Src
