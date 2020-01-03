@@ -52,6 +52,7 @@ public class QuanTriHeThong{
                             scan.nextLine();
 			    break;
 			    
+
 			case 2://read and execute command in sql file
 			    System.out.println("\nRestore data\n");
 			    System.out.print("Input the name of file restore: ");
@@ -110,6 +111,8 @@ public class QuanTriHeThong{
 				}
 			    scan.nextLine();
 			    break;
+
+
 			case 3:
 			    System.out.println("Quit");
 		System.out.println("**************************************");

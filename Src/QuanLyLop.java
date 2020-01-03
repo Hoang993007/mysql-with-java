@@ -7,6 +7,7 @@ import java.sql.*;
 import db_choose.*;
 import check_exists.*;
 import menu.*;
+import sqlPerforment.*;
 
 public class QuanLyLop{
     public void exec(){
@@ -31,6 +32,8 @@ public class QuanLyLop{
 	    
 	    String check=new String();
 	    Scanner scan=new Scanner(System.in);
+
+	    String[] fieldsNameToPrint;
 
 	    System.out.println();
 	    int choice;
@@ -178,18 +181,9 @@ public class QuanLyLop{
 					}
 				    
 				    sql="select * from Lop where MaLop='"+UDMaLop+"'";
-				    ResultSet rs=stmt.executeQuery(sql);
 
-				    System.out.println();
-				    while(rs.next()){
-	//Retrieve by column name
-				System.out.print("MaLop: "+rs.getString("MaLop"));
-				System.out.print(", MaMH: "+rs.getString("MaMH"));
-				System.out.print(", NamHoc: "+rs.getString("NamHoc"));
-				System.out.print(", HocKy: "+rs.getInt("HocKy"));
-				System.out.println(", MaGV: "+rs.getString("MaGV"));
-				    }
-				    rs.close();
+				    fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
 				
 				System.out.print("\n### Type y to continue/n to exit: ");
@@ -326,18 +320,13 @@ public class QuanLyLop{
 			    System.out.println();
 			    
 			    sql="select * from Lop";
-			    ResultSet rs=stmt.executeQuery(sql);
 			    
-			    while(rs.next()){
-				//Retrieve by column name
-				System.out.print("MaLop: "+rs.getString("MaLop"));
-				System.out.print(", MaMH: "+rs.getString("MaMH"));
-				System.out.print(", NamHoc: "+rs.getString("NamHoc"));
-				System.out.print(", HocKy: "+rs.getInt("HocKy"));
-				System.out.println(", MaGV: "+rs.getString("MaGV"));
-			    }scan.nextLine();
-			    rs.close();
+				    fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+                            scan.nextLine();
 			    break;
+
+
 			case 7:
 			    System.out.println("Quit");
 		System.out.println("**************************************");

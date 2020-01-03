@@ -21,7 +21,7 @@ Note_when_write_code: My nodes I wrote down while I make this project, It all ab
 
 ~$ cd Src
 
-~$ javac -d ../Package/ CheckExists.java Menu.java QuanLy.java QuanLyDiem.java QuanLyGiaoVien.java QuanLyLop.java QuanLyMonHoc.java QuanLySinhVien.java QuanTriHeThong.java DB_CHOOSE.java
+~$ javac -d ../Package/ SQLPerforment.java CheckExists.java Menu.java QuanLy.java QuanLyDiem.java QuanLyGiaoVien.java QuanLyLop.java QuanLyMonHoc.java QuanLySinhVien.java QuanTriHeThong.java DB_CHOOSE.java
 
 ~$ cd ../Package/
 

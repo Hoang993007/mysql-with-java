@@ -7,6 +7,7 @@ import java.sql.*;
 import db_choose.*;
 import check_exists.*;
 import menu.*;
+import sqlPerforment.*;
 
 public class QuanLyDiem{
     public void exec(){
@@ -34,6 +35,8 @@ public class QuanLyDiem{
 	    String MaMH=new String();
 	    String TenMH=new String();
 	    
+	    String[] fieldsNameToPrint;
+
 	    Scanner scan=new Scanner(System.in);
 	    String check=new String();
 
@@ -93,6 +96,7 @@ public class QuanLyDiem{
 				System.out.println();
 			    }while(check.equals("y"));
 			    break;
+
 			    
 			case 3:
 			    System.out.println("In bảng điểm cho lớp\n");
@@ -114,22 +118,15 @@ public class QuanLyDiem{
 				    +"inner join SinhVien c on c.MaSV=b.MaSV "
 				    +"where "
 				    +"b.MaLop='"+MaLop+"'";
-				ResultSet rs=stmt.executeQuery(sql);
-				
-				//Extract data from result set
-				while(rs.next()){
-				    //Retrieve by column name
-				    System.out.print("MaSV: "+rs.getString("MaSV"));
-				    System.out.print(", HoSV: "+rs.getString("HoSV"));
-				    System.out.print(", TenSV: "+rs.getString("TenSV"));
-				    System.out.print(", NgaySinh: "+rs.getString("NgaySinh"));
-				    System.out.print("NoiSinh: "+rs.getString("NoiSinh"));
-				    System.out.println(", Diem: "+rs.getInt("Diem"));
-				}
+
+				    fieldsNameToPrint=new String[]{"MaSV","HoSV","TenSV","NgaySinh","NoiSinh","Diem"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+
                                  scan.nextLine();
-				rs.close();
 			    }
 			    break;
+
+
 			case 4:
 			    System.out.println("In bảng điểm cho sinh viên\n");
 
@@ -151,24 +148,17 @@ public class QuanLyDiem{
 				    +"inner join SinhVien c on c.MaSV=b.MaSV "
 				    +"inner join MonHoc d on a.MaMH=d.MaMH "
 				    +"where b.MaSV='"+MaSV+"'";
-				ResultSet rs=stmt.executeQuery(sql);
-				
-				//STEP5: Extract data from result set
-				while(rs.next()){
-				    //Retrieve by column name
-				    System.out.print("MaLop: "+rs.getString("MaLop"));
-				    System.out.print(", MaMH: "+rs.getString("MaMH"));
-				    System.out.print(", TenMH: "+rs.getString("TenMH"));
-				    System.out.println(", Diem: "+rs.getInt("Diem"));
-				}
+
+				    fieldsNameToPrint=new String[]{"MaLop","MaMH","TenMH","Diem"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+
                                 scan.nextLine();
-				rs.close();
 			    }
 			    break;
+
+
 			case 5:
-			    System.out.println("Quit");
-		System.out.println("**************************************");
-				System.out.println();
+			    System.out.println("Quit\n**************************************\n");
 			    break;
 			}
 		}while(choice!=5);

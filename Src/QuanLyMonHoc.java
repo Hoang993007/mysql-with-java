@@ -7,6 +7,7 @@ import java.sql.*;
 import db_choose.*;
 import check_exists.*;
 import menu.*;
+import sqlPerforment.*;
 
 public class QuanLyMonHoc{
     public void exec(){
@@ -24,8 +25,11 @@ stmt=conn.createStatement();
 	    String TenMH=new String();
 	    int SoTC=0;
 	    String check=new String();
+
 	    Scanner scan=new Scanner(System.in);
 
+	    String[] fieldsNameToPrint;
+	    
 	    System.out.println();
 	    int choice;
 	    do
@@ -34,8 +38,7 @@ stmt=conn.createStatement();
 		    switch(choice)
 			{
 			case 1:
-			    System.out.println("Thêm môn học mới");
-			    System.out.println();
+			    System.out.println("Thêm môn học mới\n");
 			    
 			    do{
 				System.out.print("Ma mon hoc: ");
@@ -62,13 +65,11 @@ stmt=conn.createStatement();
 				check=scan.nextLine();
 				System.out.println();
 			    }while(check.equals("y"));
-			    
 			    break;
 			    
 			case 2:
-			    System.out.println("Sửa thông tin môn học");
-			    System.out.println();
-			    
+			    System.out.println("Sửa thông tin môn học\n");
+
 			    do{
 				System.out.print("Ma mon hoc need to be updated: ");
 				String UDMaMH=scan.nextLine();
@@ -122,16 +123,9 @@ stmt=conn.createStatement();
 					}
 				    
 				    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
-				    ResultSet rs=stmt.executeQuery(sql);
-				    
-                                    System.out.println();
-				    while(rs.next()){
-					//Retrieve by column name
-					System.out.print("MaMH: "+rs.getString("MaMH"));
-					System.out.print(", TenMH: "+rs.getString("TenMH"));
-					System.out.println(", SoTC: "+rs.getInt("SoTC"));
-				    }
-				    rs.close();
+
+				    fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
 				
 				System.out.print("\n### Type y to continue/n to exit: ");
@@ -142,25 +136,20 @@ stmt=conn.createStatement();
 			    
 			    
 			case 3:
-			    System.out.println("In danh sách môn học");
-			    System.out.println();
+			    System.out.println("In danh sách môn học\n");
 			    
 			    sql="select * from MonHoc";
-			    ResultSet rs=stmt.executeQuery(sql);
+
+			    fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
+			    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 			     
-			    while(rs.next()){
-				//Retrieve by column name
-				System.out.print("MaMH: "+rs.getString("MaMH"));
-				System.out.print(", TenMH: "+rs.getString("TenMH"));
-				System.out.println(", SoTC: "+rs.getInt("SoTC"));
-			    }scan.nextLine();
-			    rs.close();
-stmt.execute("--");
+			    scan.nextLine();
 			    break;
+
+
 			case 4:
 			    System.out.println("Quit");
-		System.out.println("**************************************");
-				System.out.println();
+			    System.out.println("**************************************\n");
 			    break;
 			}
 		}while(choice!=4);

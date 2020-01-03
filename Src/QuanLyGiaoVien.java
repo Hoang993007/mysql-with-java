@@ -7,6 +7,7 @@ import java.sql.*;
 import db_choose.*;
 import check_exists.*;
 import menu.*;
+import sqlPerforment.*;
 
 public class QuanLyGiaoVien{
     public void exec(){
@@ -26,6 +27,9 @@ public class QuanLyGiaoVien{
             String HoGV=new String();
 	    String TenGV=new String();
 	    String DonVi=new String();
+
+	    String[] fieldsNameToPrint;
+
 	    int count;
 	    
 	    String check=new String();
@@ -139,17 +143,9 @@ public class QuanLyGiaoVien{
 					}
 				    
 				    sql="select * from GiaoVien where MaGV='"+UDMaGV+"'";
-				    ResultSet rs=stmt.executeQuery(sql);
 
-				    System.out.println();
-				    while(rs.next()){
-				    //Retrieve by column name
-				    System.out.print("MaGV: "+rs.getString("MaGV"));
-				    System.out.print(", HoGV: "+rs.getString("TenGV"));
-				    System.out.print(", TenGV: "+rs.getString("HoGV"));
-				    System.out.println(", DonVi: "+ rs.getString("DonVi"));
-				    }
-				    rs.close();
+				    fieldsNameToPrint=new String[]{"MaGV","TenGV","HoGV","DonVi"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
 				
 				System.out.print("\n### Type y to continue/n to exit: ");
@@ -164,19 +160,12 @@ public class QuanLyGiaoVien{
 			    System.out.println();
 			    
 			    sql="select * from GiaoVien";
-			    ResultSet rs=stmt.executeQuery(sql);
-			    
-			    //STEP5: Extract data from result set
-			    while(rs.next()){
-				    //Retrieve by column name
-				    System.out.print("MaGV: "+rs.getString("MaGV"));
-				    System.out.print(", TenGV: "+rs.getString("TenGV"));
-				    System.out.print(", HoGV: "+rs.getString("HoGV"));
-				    System.out.println(", DonVi: "+ rs.getString("DonVi"));
 
-			    }
+				    fieldsNameToPrint=new String[]{"MaGV","TenGV","HoGV","DonVi"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+
 			    scan.nextLine();
-			    rs.close();
+
 			    break;
 			    
 			    
@@ -234,21 +223,13 @@ public class QuanLyGiaoVien{
 					sql=sql+"DonVi='"+DonVi+"' ";
 				    }
 
-				count=0;	
+	                         int checkPrint=0;
 				if(!sql.equals(sql1)){
-				    rs=stmt.executeQuery(sql);
-				    System.out.println();
-				    while(rs.next()){
-					count=count+1;
-					//Retrieve by column name
-					System.out.print("MaGV: "+rs.getString("MaGV"));
-					System.out.print(", TenGV: "+rs.getString("TenGV"));
-					System.out.print(", HoGV: "+rs.getString("HoGV"));
-					System.out.println(", DonVi: "+ rs.getString("DonVi"));
-				    }
-				    rs.close();
+
+				    fieldsNameToPrint=new String[]{"MaGV","TenGV","HoGV","DonVi"};
+				  checkPrint=new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
-				if(count==0){
+				if(checkPrint==0){
 				    System.out.println("\n*****************\nNo data\n*****************");
 				}
 				
@@ -257,6 +238,8 @@ public class QuanLyGiaoVien{
 				System.out.println();
 			    }while(check.equals("y"));
 			    break;
+
+
 			case 5:
 			    System.out.println("Quit");
 			    System.out.println("**************************************");

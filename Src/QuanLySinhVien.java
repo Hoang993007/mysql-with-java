@@ -7,6 +7,7 @@ import java.sql.*;
 import db_choose.*;
 import check_exists.*;
 import menu.*;
+import sqlPerforment.*;
 
 public class QuanLySinhVien{
     public void exec(){
@@ -27,6 +28,7 @@ public class QuanLySinhVien{
 	    String TenSV=new String();
 	    String NgaySinh=new String();
             String NoiSinh=new String();
+	    String[] fieldsNameToPrint;
 
 	    int count;
 	    
@@ -153,18 +155,9 @@ public class QuanLySinhVien{
 					}
 				    
 				    sql="select * from SinhVien where MaSV='"+UDMaSV+"'";
-				    ResultSet rs=stmt.executeQuery(sql);
 
-				    System.out.println();
-				    while(rs.next()){
-				    //Retrieve by column name
-				    System.out.print("MaSV: "+rs.getString("MaSV"));
-				    System.out.print(", TenSV: "+rs.getString("TenSV"));
-				    System.out.print(", HoSV: "+rs.getString("HoSV"));
-				    System.out.print(", NgaySinh: "+ rs.getString("NgaySinh"));
-				    System.out.println(", NoiSinh: "+ rs.getString("NoiSinh"));
-				    }
-				    rs.close();
+				    fieldsNameToPrint=new String[]{"MaSV","TenSV","HoSV","NgaySinh","NoiSinh"};
+				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
 				
 				System.out.print("\n### Type y to continue/n to exit: ");
@@ -238,23 +231,14 @@ public class QuanLySinhVien{
 					if(count>=1) sql=sql+"and "; else count=count+1;
 					sql=sql+"NoiSinh='"+NoiSinh+"' ";
 				    }
-count=0;
-		     if(!sql.equals(sql1)){
-				ResultSet rs=stmt.executeQuery(sql);
 
-                               	System.out.println();
-				while(rs.next()){
-				    count=count+1;
-				    //Retrieve by column name
-				    System.out.print("MaSV: "+rs.getString("MaSV"));
-				    System.out.print(", TenSV: "+rs.getString("TenSV"));
-				    System.out.print(", HoSV: "+rs.getString("HoSV"));
-				    System.out.print(", NgaySinh: "+ rs.getString("NgaySinh"));
-				    System.out.println(", NoiSinh: "+ rs.getString("NoiSinh"));
+	                         int checkPrint=0;
+				if(!sql.equals(sql1)){
+
+				    fieldsNameToPrint=new String[]{"MaGV","TenGV","HoGV","DonVi"};
+				  checkPrint=new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
-				rs.close();
-				}
-				if(count==0){
+				if(checkPrint==0){
 				    System.out.println("*****************\nNo data\n*****************");
 				}
 				
@@ -263,6 +247,8 @@ count=0;
 				System.out.println();
 			    }while(check.equals("y"));
 			    break;
+
+
 			case 4:
 			    System.out.println("\nQuit");
 		System.out.println("**************************************");
