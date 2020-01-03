@@ -4,17 +4,17 @@ In this project I will use Java 8.0, mySQL and JDBC to connect mySQL and Java to
 
 #About files I have in this project
 
-BakUp_sqlFile: I saved my export and import database in .sql files here.
+BakUp_sqlFile: I saved my export and import database files in .sql file here.
 
-Package: I put all packages consist of java .class files here.
+Package: I put all packages contain of .class files here.
 
 Src: My source code, contain .java files.
 
-original cuoiKi_sqlFile: The original database structure the teacher gave me.
+original cuoiKi_sqlFile: The original database structure which my teacher gave me.
 
 used_package: it contain mysql-connector-java-8.0.17.jar package which is used for JDBC.
 
-Note_when_write_code: My nodes I wrote down while I make this project, It all about code.
+Note_when_write_code: My nodes I wrote down while I make this project, It's all about code.
 
 #How to run? 
 @use terminal to run
