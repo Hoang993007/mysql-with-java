@@ -1,4 +1,4 @@
-package quanLy;
+package main;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -9,14 +9,14 @@ import menu.*;
 import muc.*;
 import db_choose.*;
 
-class QuanLy{//do not let QuanLy be a public class
+class Main{//do not let QuanLy be a public class
     public static void main(String args[]){
 	try{
 	    //STEP 2: Register JDBC driver
 	    Class.forName("com.mysql.jdbc.Driver");
 	}catch(Exception e){
 	    //Handle errors for Class.forName
-	    e.printStackTrace();
+	     e.printStackTrace();
 	}
 	
 	new DB_CHOOSE();

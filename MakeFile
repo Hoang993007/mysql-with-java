@@ -1,0 +1,60 @@
+default: run
+#phải để là default: run để nó tự động chạy!!! cần thiết
+#default là 1 thiết lập gì đó có trước
+#default not a marco tự tạo
+
+# set suffix list, to prevent confusion between different make programs
+# line 17 clears an implied suffix list, and line 18 sets a new one
+.SUFFIXES:
+.SUFFIXES: .class .java
+
+#set marco
+JC 		=javac
+JVM 		=java
+JFLAGS_SET_CLASSPATH 	=-cp
+JFLAGS_SET_STORE_PATH=-d
+JDBC_CLASSPATH	=used_package/mysql-connector-java-8.0.17.jar
+CURRENT_CLASSPATH	=.
+PACKAGE_CLASSPATH	=Package/
+SRCDIR		=Src/
+PACKAGEDIR	=Package/
+
+MAIN_CLASSDIR	=Package/main/
+MAIN_CLASSDIR_SPECIAL_RUN=main.
+
+SRC	= $(wildcard Src/*.java)
+#Get a list of all the java source files name have in Src directory
+#Example: Main.java -> Src/Main.java
+
+_MAINCLASS	= $(wildcard $(MAIN_CLASSDIR)*.class)
+
+MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
+# note: $(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS)) => Package/main/Main.class->Main
+#is different from $(patsubst $(MAIN_CLASSDIR)%.class, %, $(_MAINCLASS)) => Package/main/Main.class-> Main (add a ' ' character before Main)
+
+#make rule - file dependent
+
+#danh dau nhan dang trong truong hop trung ten
+#.PHONY
+
+$(PACKAGE_CLASSPATH):$(SRCDIR)
+	$(JC) $(JFLAGS_SET_STORE_PATH) $(PACKAGE_CLASSPATH) $(SRC)
+
+run:$(PACKAGE_CLASSPATH)
+	$(JVM) $(JFLAGS_SET_CLASSPATH) $(CURRENT_CLASSPATH):$(JDBC_CLASSPATH):$(PACKAGE_CLASSPATH) $(MAIN_CLASSDIR_SPECIAL_RUN)$(MAINCLASS)
+
+
+# $@ is the name of the file to be made.
+# $? is the names of the changed dependents.
+# $< the name of the related file that caused the action.
+# $* the prefix shared by target and dependent files.
+
+# all: library.cpp main.cpp
+# $@ evaluates to all
+# $< evaluates to library.cpp
+# $^ evaluates to library.cpp main.cpp
+
+# %.xyz:
+#         make $* clean
+# $* evaluates to %
+

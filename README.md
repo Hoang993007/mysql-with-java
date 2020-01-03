@@ -16,6 +16,11 @@ used_package: it contain mysql-connector-java-8.0.17.jar package which is used f
 
 Note_when_write_code: My nodes I wrote down while I make this project, It's all about code.
 
+MakeFile: a make file I had made to run faster
+
+#And another file
+Preserve File: I save some file that maybe I will need in the future
+
 #How to run? 
 @use terminal to run
 
@@ -23,9 +28,13 @@ Note_when_write_code: My nodes I wrote down while I make this project, It's all 
 
 ~$ javac -d ../Package/ SQLPerforment.java CheckExists.java Menu.java QuanLy.java QuanLyDiem.java QuanLyGiaoVien.java QuanLyLop.java QuanLyMonHoc.java QuanLySinhVien.java QuanTriHeThong.java DB_CHOOSE.java
 
-~$ cd ../Package/
+~$ java -cp .:used_package/mysql-connector-java-8.0.17.jar:Package/ quanLy.QuanLy
+#Note that If you want to set multiple classpaths in java in linex, then you need to separate each CLASSPATH by a colon (:).
 
-~$ java -cp .:../used_package/mysql-connector-java-8.0.17.jar quanLy.QuanLy
+@OR I had made a make file here
+You just have to use terminal:
+
+~$ make -f MakeFile 
 
 #Some knowledges I got while I made this project
 
