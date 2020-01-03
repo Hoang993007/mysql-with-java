@@ -27,6 +27,7 @@ SRC	= $(wildcard Src/*.java)
 #Example: Main.java -> Src/Main.java
 
 _MAINCLASS	= $(wildcard $(MAIN_CLASSDIR)*.class)
+#get Package/main/Main.java
 
 MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
 # note: $(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS)) => Package/main/Main.class->Main
@@ -34,12 +35,13 @@ MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
 
 #make rule - file dependent
 
-#danh dau nhan dang trong truong hop trung ten
-#.PHONY
+#đánh dấu phòng trường hợp trùng tên => Dùng .PHONY
 
+#Recomplie file Package if there are any change in Src file
 $(PACKAGE_CLASSPATH):$(SRCDIR)
 	$(JC) $(JFLAGS_SET_STORE_PATH) $(PACKAGE_CLASSPATH) $(SRC)
 
+#run the program
 run:$(PACKAGE_CLASSPATH)
 	$(JVM) $(JFLAGS_SET_CLASSPATH) $(CURRENT_CLASSPATH):$(JDBC_CLASSPATH):$(PACKAGE_CLASSPATH) $(MAIN_CLASSDIR_SPECIAL_RUN)$(MAINCLASS)
 
