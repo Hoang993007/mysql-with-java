@@ -10,7 +10,7 @@ import menu.*;
 
 public class QuanTriHeThong{
 
-    private Statement stmt;
+    Statement stmt;
     public QuanTriHeThong(Statement stmt){
 	this.stmt=stmt;
     }

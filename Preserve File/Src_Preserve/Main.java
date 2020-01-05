@@ -37,7 +37,7 @@ class Main{//do not let QuanLy be a public class
 		    new QuanLyMonHoc(stmt).exec();
 		    break;
 		case 2:
-		    new QuanLyGiaoVien().QuanLyGiaoVienChooseAction(stmt);
+		    new QuanLyGiaoVien(stmt).exec();
 		    break;
 		case 3:
 		    new QuanLySinhVien(stmt).exec();
@@ -46,7 +46,7 @@ class Main{//do not let QuanLy be a public class
 		    new QuanLyLop(stmt).exec();
 		    break;
 		case 5:
-		    new QuanLyDiem().QuanLyDiemChooseAction(stmt);
+		    new QuanLyDiem(stmt).exec();
 		    break;
 		case 6:
 		    new QuanTriHeThong(stmt).exec();

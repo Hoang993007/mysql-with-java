@@ -7,8 +7,9 @@ import java.sql.*;
 import db_choose.*;
 
 public class SQLPerforment{
-        
-    private Statement stmt;
+    
+    
+    Statement stmt;
     public SQLPerforment(Statement stmt){
 	this.stmt=stmt;
     }
