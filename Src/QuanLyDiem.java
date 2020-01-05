@@ -60,7 +60,7 @@ public class QuanLyDiem{
 				ISClass=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop",ISClass)==0){
+				if(new CheckExists().checkExists("Lop","MaLop='"+ISClass+"'")==0){
 				    System.out.println("The class doesn't exists");
                                     scan.nextLine();
 				}
@@ -73,7 +73,7 @@ public class QuanLyDiem{
 					    MaSV=scan.nextLine();
 					    
 					    //check if exists
-					    if(new CheckExists().checkExists("SinhVienLop","MaSV",MaSV)==0){
+					    if(new CheckExists().checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+ISClass+"'")==0){
 						System.out.println("\nThe SinhVien doesn't exists in this class");
                                                 scan.nextLine();
 					    }
@@ -103,7 +103,7 @@ public class QuanLyDiem{
 			    
 			    System.out.print("Input the MaLop: ");
 			    MaLop=scan.nextLine();
-			    if(new CheckExists().checkExists("Lop","MaLop",MaLop)==0){
+			    if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==0){
 				System.out.println("The class doesn't exists");
                                 scan.nextLine();
 			    }
@@ -134,7 +134,7 @@ public class QuanLyDiem{
 
 			    System.out.print("Input the MaSV: ");
 			    MaSV=scan.nextLine();
-			    if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==0){
+			    if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==0){
 				System.out.println("This student doesn't exists");
                                 scan.nextLine();
 			    }

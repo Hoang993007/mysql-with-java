@@ -6,7 +6,6 @@ import java.io.*;
 
 //my package
 import db_choose.*;
-import check_exists.*;
 import menu.*;
 
 public class QuanTriHeThong{

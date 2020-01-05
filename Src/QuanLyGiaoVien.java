@@ -51,7 +51,7 @@ public class QuanLyGiaoVien{
 				MaGV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==1)
+				if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==1)
                                     {
 				    System.out.println("\nThe record already exists");
 				}else
@@ -84,7 +84,7 @@ public class QuanLyGiaoVien{
 				String UDMaGV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("GiaoVien","MaGV",UDMaGV)==0)
+				if(new CheckExists().checkExists("GiaoVien","MaGV='"+UDMaGV+"'")==0)
 				    {
 					System.out.println("The record doesn't exists\n");
 				    }
@@ -98,7 +98,7 @@ public class QuanLyGiaoVien{
 					    System.out.print("Ma giao vien: ");
 					    MaGV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==1)
+					    if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==1)
 						{
 						    System.out.println("The record already exists\n");
 						}

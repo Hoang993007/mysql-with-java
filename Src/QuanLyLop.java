@@ -50,7 +50,7 @@ public class QuanLyLop{
 				System.out.print("Ma lop: ");
 				MaLop=scan.nextLine();
 				
-				if(new CheckExists().checkExists("Lop","MaLop",MaLop)==1){
+				if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==1){
 				    System.out.println();
 				    System.out.println("The record already exists");
 				}else{
@@ -58,7 +58,7 @@ public class QuanLyLop{
 				    MaMH=scan.nextLine();
 				    
 				    //check if exists
-				    if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==0){
+				    if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
 					System.out.println("Mon Hoc doesn't exists");
 				    }
 				    else {
@@ -66,7 +66,7 @@ public class QuanLyLop{
 					MaGV=scan.nextLine();
 					
 					//check if exists
-					if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==0){
+					if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
 					    System.out.println();
 					    System.out.println("The teacher doesn't exits");	
 					}
@@ -99,7 +99,7 @@ public class QuanLyLop{
 				String UDMaLop=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop",UDMaLop)==0){
+				if(new CheckExists().checkExists("Lop","MaLop='"+UDMaLop+"'")==0){
 				    System.out.println("The record doesn't exitst\n");
 				}
 				else{//exitst
@@ -112,7 +112,7 @@ public class QuanLyLop{
 					    System.out.print("Ma lop: ");
 					    MaLop=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("Lop","MaLop",MaLop)==1){
+					    if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==1){
 						System.out.println("The record already exists");
 						System.out.println();
 					    }
@@ -131,7 +131,7 @@ public class QuanLyLop{
 					    System.out.print("Ma mon hoc: ");
 					    MaMH=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==0){
+					    if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
 						System.out.println("Mon Hoc doesn't exists");
 					    }
 					    else {
@@ -171,7 +171,7 @@ public class QuanLyLop{
 					    System.out.print("Ma giao vien: ");
 					    MaGV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("GiaoVien","MaGV",MaGV)==0){
+					    if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
 						System.out.println("\nThe teacher doesn't exits");	
 					    }
 					    else {
@@ -192,9 +192,7 @@ public class QuanLyLop{
 			    break;
 			    
 			case 3:
-			    System.out.println();
-			    System.out.println("Bổ sung sinh viên vào lớp");
-			    System.out.println();
+			    System.out.println("\nBổ sung sinh viên vào lớp\n");
 			    
 			    String ISClass=new String();//INSERT CLASS
 			    do{
@@ -202,7 +200,7 @@ public class QuanLyLop{
 				ISClass=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop",ISClass)==0){
+				if(new CheckExists().checkExists("Lop","MaLop='"+ISClass+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {
@@ -216,13 +214,13 @@ public class QuanLyLop{
 					    MaSV=scan.nextLine();
 					    
 					    //check if exists
-					    if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==0){
+					    if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==0){
 						System.out.println("The SinhVien doesn't exists");
 					    }
 					    else
 						{
 						    //check if exists
-						    if(new CheckExists().checkExists("SinhVienLop","MaSV",MaSV)==1){
+						    if(new CheckExists().checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+ISClass+"'")==1){
 							System.out.println("\nThe record already exists");
 							
 						    }
@@ -256,7 +254,7 @@ public class QuanLyLop{
 				DLClass=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop",DLClass)==0){
+				if(new CheckExists().checkExists("Lop","MaLop='"+DLClass+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {
@@ -270,13 +268,12 @@ public class QuanLyLop{
 					    MaSV=scan.nextLine();
 					    
 					    //check if exists
-					    if(new CheckExists().checkExists("SinhVienLop","MaSV",MaSV)==0){
-						System.out.println();
-						System.out.println("The SinhVien doesn't exists in this class");
+					    if(new CheckExists().checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+DLClass+"'")==0){
+						System.out.println("\nThe SinhVien doesn't exists in this class");
 					    }
 					    else
 						{
-						    sql="delete from SinhVienLop where MaSV='"+MaSV+"'";
+						    sql="delete from SinhVienLop where MaSV='"+MaSV+"' and "+"MaLop='"+MaLop+"'";
 						    stmt.executeUpdate(sql);
 						}
 					    
@@ -301,7 +298,7 @@ public class QuanLyLop{
 				MaLop=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop",MaLop)==0){
+				if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {    

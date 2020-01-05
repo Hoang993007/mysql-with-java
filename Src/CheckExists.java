@@ -8,7 +8,7 @@ import java.sql.*;
 import db_choose.*;
 
 public class CheckExists{
-    public int checkExists(String table_name, String colum_name, String Ma){
+    public int checkExists(String fromClause, String whereClause){
 	    int feedback=1;	
 	//******************************************************************
 	Connection conn = null;
@@ -24,7 +24,7 @@ public class CheckExists{
 
 	    
 	    //check if exists
-	    sql="select * from "+table_name+"  where "+colum_name+"='"+Ma+"'";
+	    sql="select * from "+fromClause+"  where "+whereClause;
 	    ResultSet rs=stmt.executeQuery(sql);
 	    if(!rs.next()) feedback=0;
 	    rs.close();

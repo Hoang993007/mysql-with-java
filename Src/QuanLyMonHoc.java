@@ -45,7 +45,7 @@ stmt=conn.createStatement();
 				MaMH=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==1){
+				if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
 				    System.out.println("The record already exists");
 				}else{
 					System.out.print("Ten mon hoc: ");
@@ -75,7 +75,7 @@ stmt=conn.createStatement();
 				String UDMaMH=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("MonHoc","MaMH",UDMaMH)==0){
+				if(new CheckExists().checkExists("MonHoc","MaMH='"+UDMaMH+"'")==0){
 					System.out.println("The record doesn't exists\n");
 				    }
 				else{//exitst
@@ -88,8 +88,7 @@ stmt=conn.createStatement();
 					{
 					    System.out.print("Ma mon hoc: ");
 					    MaMH=scan.nextLine();
-					    if(new CheckExists().checkExists("MonHoc","MaMH",MaMH)==1)
-						{
+					    if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
 						    System.out.println("The record already exists\n");
 						}
 					    else{//exitst
@@ -102,8 +101,7 @@ stmt=conn.createStatement();
 				    System.out.print("\nUpdate ten mon hoc? (y/n): ");
 				    check=scan.nextLine();
 
-				    if(check.equals("y"))
-					{
+				    if(check.equals("y")){
 					    System.out.print("Ten mon hoc: ");
 					    TenMH=scan.nextLine();
 					    sql="update MonHoc set TenMH='"+TenMH+"' where MaMH='"+UDMaMH+"'";
@@ -113,8 +111,7 @@ stmt=conn.createStatement();
 				    System.out.print("\nUpdate so tin chi? (y/n): ");
 				    check=scan.nextLine();
 
-				    if(check.equals("y"))
-					{
+				    if(check.equals("y")){
 					    System.out.print("So tin chi: ");
 					    SoTC=scan.nextInt();
 					    check=scan.nextLine();

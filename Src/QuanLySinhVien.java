@@ -50,7 +50,7 @@ public class QuanLySinhVien{
 				MaSV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==1){
+				if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
 				    System.out.println("\nThe record already exists");
 				}else{
 					System.out.print("Ho sinh vien: ");
@@ -85,7 +85,7 @@ public class QuanLySinhVien{
 				String UDMaSV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("SinhVien","MaSV",UDMaSV)==0){
+				if(new CheckExists().checkExists("SinhVien","MaSV='"+UDMaSV+"'")==0){
 					System.out.println("The record doen't exitst\n");
 				    }
 				else{//exitst
@@ -98,8 +98,7 @@ public class QuanLySinhVien{
 					    System.out.print("Ma sinh vien: ");
 					    MaSV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("SinhVien","MaSV",MaSV)==1)
-						{
+					    if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
 						    System.out.println("The record already exists");
 						    System.out.println();
 						}
