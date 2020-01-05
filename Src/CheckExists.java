@@ -16,19 +16,23 @@ public class CheckExists{
     }
     
     public int checkExists(String fromClause, String whereClause) throws  SQLException, Exception{
-	int feedback=1;	
+	int feedback=1;//EXISTS
 	Scanner scan=new Scanner(System.in);
 	String sql=new String();
 	try{
 	    //check if exists
 	    sql="select * from "+fromClause+"  where "+whereClause;
+	    
 	    ResultSet rs=stmt.executeQuery(sql);
-	    if(!rs.next()) feedback=0;
+	    
+	    if(!rs.next()) feedback=0;//NOT EXISTS
 	    rs.close();
 	}catch(SQLException se){
-	    se.printStackTrace();scan.nextLine();
+	    feedback=-1;//ERROR
+	    se.printStackTrace();
+	    scan.nextLine();
 	}
-//scan.close();
+	
 	return feedback;
     }
 }

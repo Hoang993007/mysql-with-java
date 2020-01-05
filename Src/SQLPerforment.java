@@ -34,9 +34,10 @@ public class SQLPerforment{
 	    }
 	    rs.close();
 	    
-	}catch(SQLException se)
-	    {se.printStackTrace();scan.nextLine();}	
-	//scan.close();
+	}catch(SQLException se){
+	    se.printStackTrace();
+	    scan.nextLine();
+	}	
         if(count==0) return 0; else return 1;
     }
 }

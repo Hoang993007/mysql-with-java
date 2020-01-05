@@ -28,7 +28,7 @@ public class DB_CHOOSE{
 	//System.out.print("DATABASE: ");
 	DBNAME="cuoiKi";//scan.nextLine();
 	DB_URL = "jdbc:mysql://localhost/"+DBNAME;
-//scan.close();
+	//scan.close();
     }
     //end of static block
 }

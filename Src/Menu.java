@@ -22,36 +22,37 @@ public class Menu{
     
     public int getChoice(String[] menu){
 	System.out.print("\033[H\033[2J");//clear terminal
+	
 	printMenu(menu);
 	int option=menu.length;
 	
 	int choice;
 	Scanner scan=new Scanner(System.in);
 	
-	do
-	    {
-		System.out.print("Please choose one: ");
-		    String choiceString=scan.nextLine();
-		    if(choiceString.length()!=1||choiceString.charAt(0)>option+'0'||choiceString.charAt(0)<'1')
-                            choice=-1; else choice=choiceString.charAt(0)-'0';
+	do{
+	    System.out.print("Please choose one: ");
+	    String choiceString=scan.nextLine();
+	    if(choiceString.length()!=1||choiceString.charAt(0)>option+'0'||choiceString.charAt(0)<'1')
+		choice=-1; else choice=choiceString.charAt(0)-'0';
 
-		if(choice>option||choice<1)
-		    System.out.println("Ban da nhap sai, moi ban nhap lai!");
-	    }while(choice>option||choice<1);
+	    if(choice>option||choice<1)
+		System.out.println("Ban da nhap sai, moi ban nhap lai!");
+	    
+	}while(choice>option||choice<1);
+	
 	System.out.println("**************************************");
-//scan.close();
 	return choice;
     }
     
-    private void printMenu(String[] menu)
-    {
+    private void printMenu(String[] menu){
 	System.out.println("**************************************");
 	System.out.println(menu[0]);
 	System.out.println("**************************************");
-	for(int i=1;i<menu.length;i++)
-	    {
-		System.out.println(menu[i]);
-	    }
+	
+	for(int i=1;i<menu.length;i++){
+	    System.out.println(menu[i]);
+	}
+	
 	System.out.println("**************************************");
     }
 }

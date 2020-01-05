@@ -27,34 +27,32 @@ class Main{//do not let QuanLy be a public class
 	    new DB_CHOOSE();
 	
 	    int choice;
-	    do
-		{
-		    choice=new Menu().getChoice(Menu.mainMenu);
-		    switch(choice)
-			{
-			case 1:
-			    new QuanLyMonHoc(stmt).exec();
-			    break;
-			case 2:
-			    new QuanLyGiaoVien(stmt).exec();
-			    break;
-			case 3:
-			    new QuanLySinhVien(stmt).exec();
-			    break;
-			case 4:
-			    new QuanLyLop(stmt).exec();
-			    break;
-			case 5:
-			    new QuanLyDiem(stmt).exec();
-			    break;
-			case 6:
-			    new QuanTriHeThong(stmt).exec();
-			    break;
-			case 7:
-			    System.out.println("Quit");
-			    break;
-			}
-		}while(choice!=7);
+	    do{
+		choice=new Menu().getChoice(Menu.mainMenu);
+		switch(choice){
+		case 1:
+		    new QuanLyMonHoc(stmt).exec();
+		    break;
+		case 2:
+		    new QuanLyGiaoVien(stmt).exec();
+		    break;
+		case 3:
+		    new QuanLySinhVien(stmt).exec();
+		    break;
+		case 4:
+		    new QuanLyLop(stmt).exec();
+		    break;
+		case 5:
+		    new QuanLyDiem(stmt).exec();
+		    break;
+		case 6:
+		    new QuanTriHeThong(stmt).exec();
+		    break;
+		case 7:
+		    System.out.println("Quit");
+		    break;
+		}
+	    }while(choice!=7);
 	    //***********************************************
 	    //ko cần SQLException ở đây vì ko có câu lệnh truy vấn nào được thực hiện ở đây
 	}catch(Exception e){
@@ -72,8 +70,8 @@ class Main{//do not let QuanLy be a public class
 		    conn.close();
 	    }catch(SQLException se){
 		se.printStackTrace();
-scan.close();
 	    }//end finally try
+	    scan.close();
 	}//end try
 	//*******************************************************
     }

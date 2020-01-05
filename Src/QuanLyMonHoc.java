@@ -29,169 +29,170 @@ public class QuanLyMonHoc{
 	
 	System.out.println();
 	int choice;
-	do
-	    {
-		choice=new Menu().getChoice(Menu.menuQuanLyMonHoc);
-		switch(choice)
-		    {
-		    case 1:
-			System.out.println("Thêm môn học mới");
+	do{
+	    choice=new Menu().getChoice(Menu.menuQuanLyMonHoc);
+	    switch(choice){
+	    case 1:
+		System.out.println("Thêm môn học mới");
 			
-			do{
-			    System.out.println();
+		do{
+		    System.out.println();
+		    
+		    try_case_1:
+		    try{
+			System.out.print("Ma mon hoc: ");
+			MaMH=scan.nextLine();
+			if(MaMH.equals("")) break try_case_1;
+			    
+			//check if exists
+			if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
+			    System.out.println("The record already exists");
+			}else{
+			    System.out.print("Ten mon hoc: ");
+			    TenMH=scan.nextLine();
+			    if(TenMH.equals("")) break try_case_1;
+
+
+
+			    
+			    //do{
+			    //	try{
+			    System.out.print("So tin chi: ");
+			    SoTC=scan.nextInt();
+			    scan.nextLine();
+			    //	}catch(Exception e){
+			    //scan.nextLine();//đọc xâu thừa mà ở kia do là nextInt nên ko đọc
+			    //System.out.println("Error\n");
+			    //System.out.print("Want to continue? (y): ");
+			    //if(scan.nextLine().equals("y")
+			    //}
+			    //}while(1==1);
+
+
+
+				    
+			    sql="insert into MonHoc "
+				+"values('"+MaMH+"','"+TenMH+"',"+SoTC+")";
+
 			    try{
+				stmt.executeUpdate(sql);
+			    }catch(SQLException se){
+				se.printStackTrace();
+			    }
+			}
+			    
+		    }catch(Exception e){
+			e.printStackTrace();
+		    }
+				
+		    System.out.print("\n### Type y to continue/n to exit: ");
+		}while(scan.nextLine().equals("y"));
+		break;
+			    
+	    case 2:
+		System.out.println("Sửa thông tin môn học\n");
+
+		do{
+		    try_case_2:
+		    try{
+			System.out.print("\nMa mon hoc need to be updated: ");
+			String UDMaMH=scan.nextLine();
+			if(UDMaMH.equals("")) break try_case_2;
+				
+			//check if exists
+			if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+UDMaMH+"'")==0){
+			    System.out.println("The record doesn't exists\n");
+			}else{//exitst
+			    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
+				
+			    fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
+			    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+
+			    //start to update
+			    System.out.print("\nUpdate ma mon hoc? (y/n): ");
+			    if(scan.nextLine().equals("y")){
 				System.out.print("Ma mon hoc: ");
 				MaMH=scan.nextLine();
-			    
-				//check if exists
-				if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
-				    System.out.println("The record already exists");
-				}else{
-				    System.out.print("Ten mon hoc: ");
-				    TenMH=scan.nextLine();
-
-				    do{
-				    	try{
-					    System.out.print("So tin chi: ");
-
-
+				if(MaMH.equals("")) break try_case_2;
 					    
-					    SoTC=scan.nextInt();//nếu là số thì nó đã đọc được, nếu là ký tự thì nó sẽ sang catch, ở đó sẽ in ra và hỏi. Có nghĩa là bufer để đọc trong trường hợp mà đầu vào là số sẽ không bao giờ là y để mà xảnh ra conflix - hàm này chuyên dùng để kiểm tra nhập lại với số **********************
-					    //nếu đọc là int thì nó nhất định sẽ không đọc xâu, nên pải đọc lại
-					}catch(Exception e){
-					    SoTC=-1;
-					    scan.nextLine();
-					    System.out.println("Error\n");
-					    System.out.print("Want to continue? (y): ");
-					}
-				    }while(scan.nextLine().equals("y"));
-				    
-				    if(SoTC==-1)
-					System.out.println("\n*******No add******");
-				    else{
-					sql="insert into MonHoc "
-					    +"values('"+MaMH+"','"+TenMH+"',"+SoTC+")";
-					
-
-					
-					try{
-					    stmt.executeUpdate(sql);
-					}catch(SQLException se){
-					    se.printStackTrace();scan.nextLine();
-					}
+				if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
+				    System.out.println("The record already exists\n");
+				}else{//exitst
+				    sql="update MonHoc set MaMH='"+MaMH+"'  where MaMH='"+UDMaMH+"'";//notice the space " where
+				    try{
+					stmt.executeUpdate(sql);
+				    }catch(SQLException se){
+					se.printStackTrace();
 				    }
-				}
-				
-			    }catch(Exception e){
-				e.printStackTrace();scan.nextLine();
-			    }
-				
-			    System.out.print("\n### Type y to continue/n to exit: ");
-			}while(scan.nextLine().equals("y"));
-			break;
-			    
-		    case 2:
-			System.out.println("Sửa thông tin môn học\n");
-
-			do{
-			    System.out.println();
-			    try{
-				System.out.print("Ma mon hoc need to be updated: ");
-				String UDMaMH=scan.nextLine();
-				
-				//check if exists
-				if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+UDMaMH+"'")==0){
-				    System.out.println("The record doesn't exists\n");
-				}
-				else{//exitst
-				    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
-				
-				    fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
-				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
-				    //start to update
-				    
-				    System.out.print("\nUpdate ma mon hoc? (y/n): ");
-				    check=scan.nextLine();
-
-				    if(check.equals("y"))
-					{
-					    System.out.print("Ma mon hoc: ");
-					    MaMH=scan.nextLine();
-					    if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==1){
-						System.out.println("The record already exists\n");
-					    }
-					    else{//exitst
-						sql="update MonHoc set MaMH='"+MaMH+"'  where MaMH='"+UDMaMH+"'";//notice the space " where
-						try{
-						    stmt.executeUpdate(sql);
-						}catch(SQLException se){
-						    se.printStackTrace();scan.nextLine();
-						}
 						
-						UDMaMH=MaMH;
-					    }
-					}
-				    
-				    System.out.print("\nUpdate ten mon hoc? (y/n): ");
-				    check=scan.nextLine();
-
-				    if(check.equals("y")){
-					System.out.print("Ten mon hoc: ");
-					TenMH=scan.nextLine();
-					sql="update MonHoc set TenMH='"+TenMH+"' where MaMH='"+UDMaMH+"'";
-					try{
-					    stmt.executeUpdate(sql);
-					}catch(SQLException se){
-					    se.printStackTrace();scan.nextLine();
-					}
-					  
-				    }
-				    
-				    System.out.print("\nUpdate so tin chi? (y/n): ");
-				    check=scan.nextLine();
-
-				    if(check.equals("y")){
-					System.out.print("So tin chi: ");
-					SoTC=scan.nextInt();
-					check=scan.nextLine();
-					sql="update MonHoc set SoTC="+SoTC+" where MaMH='"+UDMaMH+"'";
-					try{
-					    stmt.executeUpdate(sql);
-					}catch(SQLException se){
-					    se.printStackTrace();scan.nextLine();
-					}
-				    }
-				    
-				    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
-				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+				    UDMaMH=MaMH;
 				}
-			    }catch(Exception e){
-				e.printStackTrace();scan.nextLine();
 			    }
-				
-			    System.out.print("\n### Type y to continue/n to exit: ");
-			}while(scan.nextLine().equals("y"));
-			break;
-			    
-			    
-		    case 3:
-			System.out.println("In danh sách môn học\n");
-			    
-			sql="select * from MonHoc";
+				    
+			    System.out.print("\nUpdate ten mon hoc? (y/n): ");
+			    if(scan.nextLine().equals("y")){
+				System.out.print("Ten mon hoc: ");
+				TenMH=scan.nextLine();
+				if(TenMH.equals("")) break try_case_2;
+					
+				sql="update MonHoc set TenMH='"+TenMH+"' where MaMH='"+UDMaMH+"'";
+				try{
+				    stmt.executeUpdate(sql);
+				}catch(SQLException se){
+				    se.printStackTrace();
+				}
+			    }
+				    
+			    System.out.print("\nUpdate so tin chi? (y/n): ");
 
-			fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
-			new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
-			     
-			scan.nextLine();
-			break;
 
 
-		    case 4:
-			System.out.println("Quit");
-			System.out.println("**************************************\n");
-			break;
+				    
+			    if(scan.nextLine().equals("y")){
+				System.out.print("So tin chi: ");
+				SoTC=scan.nextInt();
+				check=scan.nextLine();
+
+
+
+
+					
+				sql="update MonHoc set SoTC="+SoTC+" where MaMH='"+UDMaMH+"'";
+				try{
+				    stmt.executeUpdate(sql);
+				}catch(SQLException se){
+				    se.printStackTrace();scan.nextLine();
+				}
+			    }
+				    
+			    sql="select * from MonHoc where MaMH='"+UDMaMH+"'";
+			    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+			}
+		    }catch(Exception e){
+			e.printStackTrace();
 		    }
-	    }while(choice!=4);
-	//scan.close();
+				
+		    System.out.print("\n### Type y to continue/n to exit: ");
+		}while(scan.nextLine().equals("y"));
+		break;
+			    
+			    
+	    case 3:
+		System.out.println("In danh sách môn học\n");
+			    
+		sql="select * from MonHoc";
+
+		fieldsNameToPrint=new String[]{"MaMH","TenMH","SoTC"};
+		new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+			     
+		scan.nextLine();
+		break;
+
+
+	    case 4:
+		System.out.println("Quit\n**************************************\n");
+		break;
+	    }
+	}while(choice!=4);
     }
 }
