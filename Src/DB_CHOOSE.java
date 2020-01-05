@@ -1,3 +1,5 @@
+//INPUT WHICH DATABASE WILL BE USED FOR THE PROGRAM. MUST BE SET UP FIRST AND CAN NOT BE CHANGE
+
 package db_choose;
 
 import java.util.Scanner;

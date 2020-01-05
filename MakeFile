@@ -1,14 +1,14 @@
-default: run
 #phải để là default: run để nó tự động chạy!!! cần thiết
 #default là 1 thiết lập gì đó có trước
 #default not a marco tự tạo
+default: run
 
 # set suffix list, to prevent confusion between different make programs
 # line 17 clears an implied suffix list, and line 18 sets a new one
 .SUFFIXES:
 .SUFFIXES: .class .java
 
-#set marco
+#SET MARCE
 JC 		=javac
 JVM 		=java
 JFLAGS_SET_CLASSPATH 	=-cp
@@ -22,18 +22,21 @@ PACKAGEDIR	=Package/
 MAIN_CLASSDIR	=Package/main/
 MAIN_CLASSDIR_SPECIAL_RUN=main.
 
-SRC	= $(wildcard Src/*.java)
+#MODIFY STRING TO ADD TO CREATE COMMAND LINE TO EXECUTE IN TERMINAL
+
 #Get a list of all the java source files name have in Src directory
 #Example: Main.java -> Src/Main.java
+SRC	= $(wildcard Src/*.java)
 
-_MAINCLASS	= $(wildcard $(MAIN_CLASSDIR)*.class)
 #get Package/main/Main.java
+_MAINCLASS	= $(wildcard $(MAIN_CLASSDIR)*.class)
 
-MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
 # note: $(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS)) => Package/main/Main.class->Main
 #is different from $(patsubst $(MAIN_CLASSDIR)%.class, %, $(_MAINCLASS)) => Package/main/Main.class-> Main (add a ' ' character before Main)
+MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
 
-#make rule - file dependent
+
+#CREATE RULES - file dependent
 
 #đánh dấu phòng trường hợp trùng tên => Dùng .PHONY
 
@@ -46,7 +49,7 @@ run:$(PACKAGE_CLASSPATH)
 #	emacs&
 	$(JVM) $(JFLAGS_SET_CLASSPATH) $(CURRENT_CLASSPATH):$(JDBC_CLASSPATH):$(PACKAGE_CLASSPATH) $(MAIN_CLASSDIR_SPECIAL_RUN)$(MAINCLASS)
 
-
+#SOME NOTE:
 # $@ is the name of the file to be made.
 # $? is the names of the changed dependents.
 # $< the name of the related file that caused the action.

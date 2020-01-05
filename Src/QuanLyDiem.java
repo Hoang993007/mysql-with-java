@@ -29,7 +29,7 @@ public class QuanLyDiem{
 	    String NgaySinh=new String();
 	    String NoiSinh=new String();
 	    int Diem;
-
+	   
             String clearInt=new String();
 
 	    String MaMH=new String();

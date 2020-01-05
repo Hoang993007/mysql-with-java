@@ -6,6 +6,8 @@ import java.sql.*;
 import db_choose.*;
 
 public class SQLPerforment{
+
+    //PRINT THE RESULT RETURNED BY THE SELECT QUERY
     public int prtQueryRs(String sql, String[] fields, String[] fieldsNamePerform){
         int count=0;
 	//******************************************************************
@@ -15,7 +17,7 @@ public class SQLPerforment{
 	try{
 	    Class.forName("com.mysql.jdbc.Driver");
 	    conn = DriverManager.getConnection(DB_CHOOSE.DB_URL, DB_CHOOSE.USER, DB_CHOOSE.PASS);
-	    
+
 	    stmt=conn.createStatement();
 	    //**********************************************************
 	    ResultSet rs=stmt.executeQuery(sql);

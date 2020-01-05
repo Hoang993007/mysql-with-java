@@ -1,3 +1,5 @@
+//PRINT SELECTION OF CHOSEN MENU - GET CHOICE AND RETURN TO THE FUNCTION
+
 package menu;
 
 import java.util.Scanner;

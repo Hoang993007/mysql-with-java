@@ -1,3 +1,5 @@
+//CHECK IF A RECORD EXISTS OR NOT IN A TABLE OF CHOSEN DATABASE
+
 package check_exists;
 
 import java.sql.*;
