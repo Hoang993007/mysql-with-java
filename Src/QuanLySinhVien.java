@@ -10,85 +10,91 @@ import menu.*;
 import sqlPerforment.*;
 
 public class QuanLySinhVien{
-    public void exec(){
-	//***********************************************************
-	Connection conn = null;
-	Statement stmt = null;
-	try{
-	    Class.forName("com.mysql.jdbc.Driver");
 
-	    conn = DriverManager.getConnection(DB_CHOOSE.DB_URL, DB_CHOOSE.USER, DB_CHOOSE.PASS);
+    Statement stmt;
+    public QuanLySinhVien(Statement stmt){
+	this.stmt=stmt;
+    }
+    
+    public void exec() throws  SQLException, Exception{
+	String sql=new String();
+	String MaSV=new String();
+	String HoSV=new String();
+	String TenSV=new String();
+	String NgaySinh=new String();
+	String NoiSinh=new String();
+	String[] fieldsNameToPrint;
 
-	    stmt=conn.createStatement();
-	    //**********************************************************
-
-	    String sql=new String();
-	    String MaSV=new String();
-            String HoSV=new String();
-	    String TenSV=new String();
-	    String NgaySinh=new String();
-            String NoiSinh=new String();
-	    String[] fieldsNameToPrint;
-
-	    int count;
+	int count;
 	    
-	    String check=new String();
-	    Scanner scan=new Scanner(System.in);
+	String check=new String();
+	Scanner scan=new Scanner(System.in);
 
-	    System.out.println();
-	    int choice;
-	    do
-		{
-		    choice=new Menu().getChoice(Menu.menuQuanLySinhVien);
-		    switch(choice)
-			{
-			case 1:
-			    System.out.println("Thêm hồ sơ sinh viên");
+	System.out.println();
+	int choice;
+	do
+	    {
+		choice=new Menu().getChoice(Menu.menuQuanLySinhVien);
+		switch(choice)
+		    {
+		    case 1:
+			System.out.println("Thêm hồ sơ sinh viên");
 			    
-			    do{
+			do{
+			    try{
 				System.out.print("\nMa sinh vien: ");
 				MaSV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
+				if(new CheckExists(stmt).checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
 				    System.out.println("\nThe record already exists");
 				}else{
-					System.out.print("Ho sinh vien: ");
-					HoSV=scan.nextLine();
+				    System.out.print("Ho sinh vien: ");
+				    HoSV=scan.nextLine();
 					
-					System.out.print("Ten sinh vien: ");
-					TenSV=scan.nextLine();
+				    System.out.print("Ten sinh vien: ");
+				    TenSV=scan.nextLine();
 					
-					System.out.print("Ngay sinh (yyyy-mm-dd): ");
-					NgaySinh=scan.nextLine();
+				    System.out.print("Ngay sinh (yyyy-mm-dd): ");
+				    NgaySinh=scan.nextLine();
 					
-					System.out.print("Noi sinh: ");
-					NoiSinh=scan.nextLine();
+				    System.out.print("Noi sinh: ");
+				    NoiSinh=scan.nextLine();
 					
-					sql="insert into SinhVien "
-					    +"values('"+MaSV+"','"+HoSV+"','"+TenSV+"','"+NgaySinh+"','"+NoiSinh+"')";
+				    sql="insert into SinhVien "
+					+"values('"+MaSV+"','"+HoSV+"','"+TenSV+"','"+NgaySinh+"','"+NoiSinh+"')";
+				    try{
 					stmt.executeUpdate(sql);
+				    }catch(SQLException se){
+					se.printStackTrace();scan.nextLine();
 				    }
+				}
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
 				
-				
-				System.out.print("\n### Type y to continue/n to exit: ");
-				check=scan.nextLine();
-			    }while(check.equals("y"));
-			    break;
+			    System.out.print("\n### Type y to continue/n to exit: ");
+			}while(scan.nextLine().equals("y"));
+			break;
 			    
 			    
-			case 2:
-			    System.out.println("\nSửa thông tin sinh viên\n");
+		    case 2:
+			System.out.println("\nSửa thông tin sinh viên\n");
 			    
-			    do{
-				System.out.print("Ma sinh vien need to be updated: ");
+			do{
+			    try{
+				System.out.print("\nMa sinh vien need to be updated: ");
 				String UDMaSV=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("SinhVien","MaSV='"+UDMaSV+"'")==0){
-					System.out.println("The record doen't exitst\n");
-				    }
+				if(new CheckExists(stmt).checkExists("SinhVien","MaSV='"+UDMaSV+"'")==0){
+				    System.out.println("The record doen't exitst\n");
+				}
 				else{//exitst
+				    sql="select * from SinhVien where MaSV='"+UDMaSV+"'";
+				
+				    fieldsNameToPrint=new String[]{"MaSV","TenSV","HoSV","NgaySinh","NoiSinh"};
+				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				    //start to update
 				    System.out.print("\nUpdate ma sinh vien? (y/n): ");
 				    check=scan.nextLine();
@@ -98,13 +104,17 @@ public class QuanLySinhVien{
 					    System.out.print("Ma sinh vien: ");
 					    MaSV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
-						    System.out.println("The record already exists");
-						    System.out.println();
-						}
+					    if(new CheckExists(stmt).checkExists("SinhVien","MaSV='"+MaSV+"'")==1){
+						System.out.println("The record already exists");
+						System.out.println();
+					    }
 					    else{//exitst
 						sql="update SinhVien set MaSV='"+MaSV+"'  where MaSV='"+UDMaSV+"'";//notice the space " where
-						stmt.executeUpdate(sql);
+						try{
+						    stmt.executeUpdate(sql);
+						}catch(SQLException se){
+						    se.printStackTrace();scan.nextLine();
+						}
 						UDMaSV=MaSV;
 					    }
 					}
@@ -117,7 +127,11 @@ public class QuanLySinhVien{
 					    System.out.print("Ho sinh vien: ");
 					    HoSV=scan.nextLine();
 					    sql="update SinhVien set HoSV='"+HoSV+"' where MaSV='"+UDMaSV+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    System.out.print("\nUpdate ten sinh vien? (y/n): ");
@@ -128,7 +142,11 @@ public class QuanLySinhVien{
 					    System.out.print("Ten sinh vien: ");
 					    TenSV=scan.nextLine();
 					    sql="update SinhVien set TenSV='"+TenSV+"' where MaSV='"+UDMaSV+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    System.out.print("\nUpdate ngay sinh? (y/n): ");
@@ -139,7 +157,11 @@ public class QuanLySinhVien{
 					    System.out.print("Ngay sinh: ");
 					    NgaySinh=scan.nextLine();
 					    sql="update SinhVien set NgaySinh='"+NgaySinh+"' where MaSV='"+UDMaSV+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    System.out.print("\nUpdate noi sinh? (y/n): ");
@@ -150,27 +172,30 @@ public class QuanLySinhVien{
 					    System.out.print("Noi sinh: ");
 					    NoiSinh=scan.nextLine();
 					    sql="update SinhVien set NoiSinh='"+NoiSinh+"' where MaSV='"+UDMaSV+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    sql="select * from SinhVien where MaSV='"+UDMaSV+"'";
-
-				    fieldsNameToPrint=new String[]{"MaSV","TenSV","HoSV","NgaySinh","NoiSinh"};
-				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
-				
-				System.out.print("\n### Type y to continue/n to exit: ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-		    break;
-		    
-		    
-			case 3:
-			    System.out.println("Tìm kiếm sinh viên");
-			    System.out.println();
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
 			    
-			    do{
+			    System.out.print("\n### Type y to continue/n to exit: ");
+			}while(scan.nextLine().equals("y"));
+			break;
+		    
+		    
+		    case 3:
+			System.out.println("Tìm kiếm sinh viên");
+			    
+			do{
+			    try{
 				sql="select * from SinhVien where ";
 				String sql1=sql;
 
@@ -209,7 +234,7 @@ public class QuanLySinhVien{
 					sql=sql+"HoSV='"+HoSV+"' ";
 				    }
 				
-		        	System.out.print("\nUse ngay sinh to search? (y/n): ");
+				System.out.print("\nUse ngay sinh to search? (y/n): ");
 				check=scan.nextLine();
 				
 				if(check.equals("y"))
@@ -231,52 +256,30 @@ public class QuanLySinhVien{
 					sql=sql+"NoiSinh='"+NoiSinh+"' ";
 				    }
 
-	                         int checkPrint=0;
+				int checkPrint=0;
 				if(!sql.equals(sql1)){
 
 				    fieldsNameToPrint=new String[]{"MaGV","TenGV","HoGV","DonVi"};
-				  checkPrint=new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+				    checkPrint=new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
 				if(checkPrint==0){
 				    System.out.println("*****************\nNo data\n*****************");
 				}
-				
-				System.out.print("\n### Type y to continue/n to exit: ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-			    break;
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
+			    
+			    System.out.print("\n### Type y to continue/n to exit: ");
+			}while(scan.nextLine().equals("y"));
+			break;
 
 
-			case 4:
-			    System.out.println("\nQuit");
-		System.out.println("**************************************");
-				System.out.println();
-			    break;
-			}
-		}while(choice!=4);
-	    
-	    //***********************************************
-	}catch(SQLException se){
-	    //Handle errors for JDBC
-	    se.printStackTrace();
-	}catch(Exception e){
-	    //Handle errors for Class.forName
-	    e.printStackTrace();
-	}finally{
-	    //finally block used to close resources
-	    try{
-		if(stmt!=null)
-		    conn.close();
-	    }catch(SQLException se){
-	    }// do nothing
-	    try{
-		if(conn!=null)
-		    conn.close();
-	    }catch(SQLException se){
-		se.printStackTrace();
-	    }//end finally try
-	}//end try
-	//*******************************************************
+		    case 4:
+			System.out.println("\nQuit");
+			System.out.println("**************************************");
+			System.out.println();
+			break;
+		    }
+	    }while(choice!=4);
     }
 }

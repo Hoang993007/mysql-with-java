@@ -37,7 +37,7 @@ CREATE TABLE `GiaoVien` (
 
 LOCK TABLES `GiaoVien` WRITE;
 /*!40000 ALTER TABLE `GiaoVien` DISABLE KEYS */;
-INSERT INTO `GiaoVien` VALUES ('GV001','Tran','Trung Duc','DHBKHN'),('GV002','Nguyen','Van A','DHBKHN');
+INSERT INTO `GiaoVien` VALUES ('abcxtuv','Ma Van','Tai','Tu nhien'),('cnsjij','Tam Tam','Tam','xA HOI'),('GV001','Tran','Trung Duc','DHBKHN'),('GV002','Nguyen','Van A','DHBKHN'),('GV69','John','Weak','WWE'),('vhdbjd','Tam Tam','Tam','Xa Hoi');
 /*!40000 ALTER TABLE `GiaoVien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `MonHoc` (
 
 LOCK TABLES `MonHoc` WRITE;
 /*!40000 ALTER TABLE `MonHoc` DISABLE KEYS */;
-INSERT INTO `MonHoc` VALUES ('MH001','MonHoc1',1),('MH002','MonHoc2',1),('MH003','MonHoc2',2),('MH004','MonHoc2',1),('MH005','MonHoc3',2),('MH006','MonHoc4',5),('MH007','MonHoc6',3),('MH008','MonHoc1',1),('MH009','MonHoc4',2),('MH010','MonHoc6',3),('MH012','MonHoc12',3),('MH013','x',2),('MH015','MonHoc15',2);
+INSERT INTO `MonHoc` VALUES ('090909','Math I',1),('123456','Khoa hoc toi pham',4),('696969','090909',2),('909090','Hoc nua hoc mai',2),('969696','Khoa hoc toi pham',3),('ddddd','asdfasdfasdf',3),('MH001','MonHoc1',1),('MH002','MonHoc2',1),('MH003','MonHoc2',2),('MH004','MonHoc2',1),('MH005','MonHoc3',2),('MH006','MonHoc4',5),('MH007','MonHoc6',3),('MH008','MonHoc1',1),('MH009','MonHoc4',2),('MH010','MonHoc6',3),('MH012','MonHoc12',3),('MH013','x',2),('MH015','MonHoc15',2),('MH323','Toan Hoc',2),('MH333','Uong bia',3),('sdf','sdf',0),('sdfs','sdfs',0),('sdfsdf','sdfsd',0),('sdfsdfsdfs','sfsdfsdf',0),('sfsdfs','sdfsdfs',0),('sfsfsdf','sdfsdfsdf',1);
 /*!40000 ALTER TABLE `MonHoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +134,7 @@ DROP TABLE IF EXISTS `SinhVienLop`;
 CREATE TABLE `SinhVienLop` (
   `MaSV` varchar(10) NOT NULL,
   `MaLop` varchar(10) NOT NULL,
-  `Diem` int(11) DEFAULT NULL,
+  `Diem` double DEFAULT NULL,
   PRIMARY KEY (`MaSV`,`MaLop`),
   KEY `MaLop` (`MaLop`),
   CONSTRAINT `SinhVienLop_ibfk_1` FOREIGN KEY (`MaSV`) REFERENCES `SinhVien` (`MaSV`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -148,7 +148,7 @@ CREATE TABLE `SinhVienLop` (
 
 LOCK TABLES `SinhVienLop` WRITE;
 /*!40000 ALTER TABLE `SinhVienLop` DISABLE KEYS */;
-INSERT INTO `SinhVienLop` VALUES ('SV001','L001',10),('SV002','L001',NULL);
+INSERT INTO `SinhVienLop` VALUES ('SV001','L001',10),('SV002','L001',10),('SV003','L001',NULL);
 /*!40000 ALTER TABLE `SinhVienLop` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-02 20:23:45
+-- Dump completed on 2020-01-05 20:07:11

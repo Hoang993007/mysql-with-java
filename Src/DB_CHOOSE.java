@@ -10,24 +10,25 @@ public class DB_CHOOSE{
     
     public static final String DB_URL;
     public static final String DBNAME;
-
+    
     //  Database credentials
     public static final String USER;
     public static final String PASS;
-
+    
     //start of static block
     static{
 	Scanner scan=new Scanner(System.in);
 	
 	//System.out.print("USER: ");
 	USER ="hoangdb";//scan.nextLine();
-
+	
 	//System.out.print("PASS: ");
         PASS ="123";// scan.nextLine();//pass of USER
 	
 	//System.out.print("DATABASE: ");
 	DBNAME="cuoiKi";//scan.nextLine();
 	DB_URL = "jdbc:mysql://localhost/"+DBNAME;
+//scan.close();
     }
     //end of static block
 }

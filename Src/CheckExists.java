@@ -2,56 +2,33 @@
 
 package check_exists;
 
+import java.util.Scanner;
 import java.sql.*;
 
 //my package
 import db_choose.*;
 
 public class CheckExists{
-    public int checkExists(String fromClause, String whereClause){
-	    int feedback=1;	
-	//******************************************************************
-	Connection conn = null;
-	Statement stmt = null;
+    
+    Statement stmt;
+    public CheckExists(Statement stmt){
+	this.stmt=stmt;
+    }
+    
+    public int checkExists(String fromClause, String whereClause) throws  SQLException, Exception{
+	int feedback=1;	
+	Scanner scan=new Scanner(System.in);
+	String sql=new String();
 	try{
-	    Class.forName("com.mysql.jdbc.Driver");
-	    conn = DriverManager.getConnection(DB_CHOOSE.DB_URL, DB_CHOOSE.USER, DB_CHOOSE.PASS);
-	    
-	    stmt=conn.createStatement();
-	    //**********************************************************
-
-	    String sql=new String();
-
-	    
 	    //check if exists
 	    sql="select * from "+fromClause+"  where "+whereClause;
 	    ResultSet rs=stmt.executeQuery(sql);
 	    if(!rs.next()) feedback=0;
 	    rs.close();
-
-	    //***********************************************
 	}catch(SQLException se){
-	    //Handle errors for JDBC
-	    se.printStackTrace();
-	}catch(Exception e){
-	    //Handle errors for Class.forName
-	    e.printStackTrace();
-	}finally{
-	    //finally block used to close resources
-	    try{
-		if(stmt!=null)
-		    conn.close();
-	    }catch(SQLException se){
-	    }// do nothing
-	    try{
-		if(conn!=null)
-		    conn.close();
-	    }catch(SQLException se){
-		se.printStackTrace();
-	    }//end finally try
-	}//end try
-	//*******************************************************
-	
+	    se.printStackTrace();scan.nextLine();
+	}
+//scan.close();
 	return feedback;
     }
 }

@@ -10,47 +10,43 @@ import menu.*;
 import sqlPerforment.*;
 
 public class QuanLyLop{
-    public void exec(){
-//***********************************************************
-	Connection conn = null;
-	Statement stmt = null;
-	try{
-	    Class.forName("com.mysql.jdbc.Driver");
 
-	    conn = DriverManager.getConnection(DB_CHOOSE.DB_URL, DB_CHOOSE.USER, DB_CHOOSE.PASS);
+    Statement stmt;
+    public QuanLyLop(Statement stmt){
+	this.stmt=stmt;
+    }
+    
+    public void exec() throws  SQLException, Exception{
+	String sql=new String();
+	String MaLop=new String();
+	String MaMH=new String();
+	String NamHoc=new String();
+	int HocKy;
+	String MaGV=new String();
+	String MaSV=new String();
 	    
-	    stmt=conn.createStatement();
-	    //**********************************************************
+	String check=new String();
+	Scanner scan=new Scanner(System.in);
 
-	    String sql=new String();
-	    String MaLop=new String();
-            String MaMH=new String();
-	    String NamHoc=new String();
-	    int HocKy;
-	    String MaGV=new String();
-	    String MaSV=new String();
-	    
-	    String check=new String();
-	    Scanner scan=new Scanner(System.in);
+	String[] fieldsNameToPrint;
 
-	    String[] fieldsNameToPrint;
-
-	    System.out.println();
-	    int choice;
-	    do
-		{
-		    choice=new Menu().getChoice(Menu.menuQuanLyLop);
-		    switch(choice)
-			{
-			case 1:
-			    System.out.println("Tạo lớp mới");
-			    System.out.println();
+	System.out.println();
+	int choice;
+	do
+	    {
+		choice=new Menu().getChoice(Menu.menuQuanLyLop);
+		switch(choice)
+		    {
+		    case 1:
+			System.out.println("Tạo lớp mới");
+			System.out.println();
 			    
-			    do{
+			do{
+			    try{
 				System.out.print("Ma lop: ");
 				MaLop=scan.nextLine();
 				
-				if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==1){
+				if(new CheckExists(stmt).checkExists("Lop","MaLop='"+MaLop+"'")==1){
 				    System.out.println();
 				    System.out.println("The record already exists");
 				}else{
@@ -58,7 +54,7 @@ public class QuanLyLop{
 				    MaMH=scan.nextLine();
 				    
 				    //check if exists
-				    if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
+				    if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
 					System.out.println("Mon Hoc doesn't exists");
 				    }
 				    else {
@@ -66,7 +62,7 @@ public class QuanLyLop{
 					MaGV=scan.nextLine();
 					
 					//check if exists
-					if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
+					if(new CheckExists(stmt).checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
 					    System.out.println();
 					    System.out.println("The teacher doesn't exits");	
 					}
@@ -80,29 +76,39 @@ public class QuanLyLop{
 					    
 					    sql="insert into Lop "
 						+"values('"+MaLop+"','"+MaMH+"','"+NamHoc+"',"+HocKy+",'"+MaGV+"')";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    }
 				}
-				
-				System.out.print("\n### Type y to continue/n to exit: ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-			    break;
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
+			    System.out.print("\n### Type y to continue/n to exit: ");
+			}while(scan.nextLine().equals("y"));
+			break;
 			    
-			case 2:
-			    System.out.println("Sửa đổi thông tin lớp\n");
+		    case 2:
+			System.out.println("Sửa đổi thông tin lớp\n");
 			    
-			    do{
+			do{
+			    try{
 				System.out.print("Ma lop need to be updated: ");
 				String UDMaLop=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop='"+UDMaLop+"'")==0){
+				if(new CheckExists(stmt).checkExists("Lop","MaLop='"+UDMaLop+"'")==0){
 				    System.out.println("The record doesn't exitst\n");
 				}
 				else{//exitst
+				    sql="select * from Lop where MaLop='"+UDMaLop+"'";
+				
+				    fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
+				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+
 				    //start to update
 				    System.out.print("\nUpdate ma lop? (y/n): ");
 				    check=scan.nextLine();
@@ -112,13 +118,17 @@ public class QuanLyLop{
 					    System.out.print("Ma lop: ");
 					    MaLop=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==1){
+					    if(new CheckExists(stmt).checkExists("Lop","MaLop='"+MaLop+"'")==1){
 						System.out.println("The record already exists");
 						System.out.println();
 					    }
 					    else{//exitst
 						sql="update Lop set MaLop='"+MaLop+"'  where MaLop='"+UDMaLop+"'";//notice the space " where
-						stmt.executeUpdate(sql);
+						try{
+						    stmt.executeUpdate(sql);
+						}catch(SQLException se){
+						    se.printStackTrace();scan.nextLine();
+						}
 						UDMaLop=MaLop;
 					    }
 					}
@@ -131,12 +141,16 @@ public class QuanLyLop{
 					    System.out.print("Ma mon hoc: ");
 					    MaMH=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
+					    if(new CheckExists(stmt).checkExists("MonHoc","MaMH='"+MaMH+"'")==0){
 						System.out.println("Mon Hoc doesn't exists");
 					    }
 					    else {
 						sql="update Lop set MaMH='"+MaMH+"' where MaLop='"+UDMaLop+"'";
-						stmt.executeUpdate(sql);
+						try{
+						    stmt.executeUpdate(sql);
+						}catch(SQLException se){
+						    se.printStackTrace();scan.nextLine();
+						}
 					    }
 					}
 				    
@@ -148,7 +162,11 @@ public class QuanLyLop{
 					    System.out.print("Nam hoc (xxxx-xxxx): ");
 					    NamHoc=scan.nextLine();
 					    sql="update Lop set NamHoc='"+NamHoc+"' where MaLop='"+UDMaLop+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    System.out.print("\nUpdate hoc ky? (y/n): ");
@@ -160,7 +178,11 @@ public class QuanLyLop{
 					    HocKy=scan.nextInt();
 					    check=scan.nextLine();//CLEAR BUFFER
 					    sql="update Lop set HocKy="+HocKy+" where MaLop='"+UDMaLop+"'";
-					    stmt.executeUpdate(sql);
+					    try{
+						stmt.executeUpdate(sql);
+					    }catch(SQLException se){
+						se.printStackTrace();scan.nextLine();
+					    }
 					}
 				    
 				    System.out.print("\nUpdate giao vien? (y/n): ");
@@ -171,36 +193,40 @@ public class QuanLyLop{
 					    System.out.print("Ma giao vien: ");
 					    MaGV=scan.nextLine();
 					    
-					    if(new CheckExists().checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
+					    if(new CheckExists(stmt).checkExists("GiaoVien","MaGV='"+MaGV+"'")==0){
 						System.out.println("\nThe teacher doesn't exits");	
 					    }
 					    else {
 						sql="update Lop set MaGV='"+MaGV+"'  where MaLop='"+UDMaLop+"'";//notice the space " where
-						stmt.executeUpdate(sql);
+						try{
+						    stmt.executeUpdate(sql);
+						}catch(SQLException se){
+						    se.printStackTrace();scan.nextLine();
+						}
 					    }
 					}
 				    
 				    sql="select * from Lop where MaLop='"+UDMaLop+"'";
-
-				    fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
-				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+				    new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
 				}
-				
-				System.out.print("\n### Type y to continue/n to exit: ");
-				check=scan.nextLine();
-			    }while(check.equals("y"));
-			    break;
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
+			    System.out.print("\n### Type y to continue/n to exit: ");
+			}while(scan.nextLine().equals("y"));
+			break;
 			    
-			case 3:
-			    System.out.println("\nBổ sung sinh viên vào lớp\n");
+		    case 3:
+			System.out.println("\nBổ sung sinh viên vào lớp\n");
 			    
-			    String ISClass=new String();//INSERT CLASS
-			    do{
+			String ISClass=new String();//INSERT CLASS
+			do{
+			    try{
 				System.out.print("Input the MaLop you want to add student to: ");
 				ISClass=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop='"+ISClass+"'")==0){
+				if(new CheckExists(stmt).checkExists("Lop","MaLop='"+ISClass+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {
@@ -214,20 +240,24 @@ public class QuanLyLop{
 					    MaSV=scan.nextLine();
 					    
 					    //check if exists
-					    if(new CheckExists().checkExists("SinhVien","MaSV='"+MaSV+"'")==0){
+					    if(new CheckExists(stmt).checkExists("SinhVien","MaSV='"+MaSV+"'")==0){
 						System.out.println("The SinhVien doesn't exists");
 					    }
 					    else
 						{
 						    //check if exists
-						    if(new CheckExists().checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+ISClass+"'")==1){
+						    if(new CheckExists(stmt).checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+ISClass+"'")==1){
 							System.out.println("\nThe record already exists");
 							
 						    }
 						    else {
 							sql="insert into SinhVienLop (MaSV,MaLop)"
 							    +"values('"+MaSV+"','"+ISClass+"')";
-							stmt.executeUpdate(sql);
+							try{
+							    stmt.executeUpdate(sql);
+							}catch(SQLException se){
+							    se.printStackTrace();scan.nextLine();
+							}
 						    }
 						}
 					    
@@ -236,25 +266,27 @@ public class QuanLyLop{
 					    System.out.println();
 					}while(check2.equals("y"));
 				}
-				
-				System.out.print("\nDo you want to continue with new class? (y/n): ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-			    
-			    break;
-			    
-			case 4:
-			    System.out.println("Loại bỏ sinh viên khỏi lớp");
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
+			    System.out.print("\nDo you want to continue with new class? (y/n): ");
+			    check=scan.nextLine();
 			    System.out.println();
+			}while(check.equals("y"));
 			    
-			    String DLClass=new String();//DELETE CLASS
-			    do{
+			break;
+			    
+		    case 4:
+			System.out.println("Loại bỏ sinh viên khỏi lớp\n");
+			    
+			String DLClass=new String();//DELETE CLASS
+			do{
+			    try{
 				System.out.print("Input the MaLop you want to delete student from: ");
 				DLClass=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop='"+DLClass+"'")==0){
+				if(new CheckExists(stmt).checkExists("Lop","MaLop='"+DLClass+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {
@@ -268,13 +300,17 @@ public class QuanLyLop{
 					    MaSV=scan.nextLine();
 					    
 					    //check if exists
-					    if(new CheckExists().checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+DLClass+"'")==0){
+					    if(new CheckExists(stmt).checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+DLClass+"'")==0){
 						System.out.println("\nThe SinhVien doesn't exists in this class");
 					    }
 					    else
 						{
 						    sql="delete from SinhVienLop where MaSV='"+MaSV+"' and "+"MaLop='"+MaLop+"'";
-						    stmt.executeUpdate(sql);
+						    try{
+							stmt.executeUpdate(sql);
+						    }catch(SQLException se){
+							se.printStackTrace();scan.nextLine();
+						    }
 						}
 					    
 					    System.out.print("\nDo you want to continue delete studen from this class? (y/n): ");
@@ -282,77 +318,65 @@ public class QuanLyLop{
 					    System.out.println();
 					}while(check2.equals("y"));
 				}
-				
-				System.out.print("\nDo you want to continue with new class? (y/n): ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-			    break;
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
 			    
-			case 5:
-			    System.out.println("Hủy lớp");
+			    System.out.print("\nDo you want to continue with new class? (y/n): ");
+			    check=scan.nextLine();
 			    System.out.println();
+			}while(check.equals("y"));
+			break;
 			    
-			    do{
+		    case 5:
+			System.out.println("Hủy lớp\n");
+			    
+			do{
+			    try{
 				System.out.print("Input the MaLop you want to delete: ");
 				MaLop=scan.nextLine();
 				
 				//check if exists
-				if(new CheckExists().checkExists("Lop","MaLop='"+MaLop+"'")==0){
+				if(new CheckExists(stmt).checkExists("Lop","MaLop='"+MaLop+"'")==0){
 				    System.out.println("The class doesn't exists");
 				}
 				else {    
 				    sql="delete from Lop where MaLop='"+MaLop+"'";
-				    stmt.executeUpdate(sql);	   
+				    try{
+					stmt.executeUpdate(sql);
+				    }catch(SQLException se){
+					se.printStackTrace();scan.nextLine();
+				    }	   
 				}
-				
-				System.out.print("\nDo you want to continue with new class? (y/n): ");
-				check=scan.nextLine();
-				System.out.println();
-			    }while(check.equals("y"));
-			    break;
+			    }catch(Exception e){
+				e.printStackTrace();scan.nextLine();
+			    }
 			    
-			case 6:
-			    System.out.println("In danh sách lớp");
+			    System.out.print("\nDo you want to continue with new class? (y/n): ");
+			    check=scan.nextLine();
 			    System.out.println();
+			}while(check.equals("y"));
+			break;
 			    
-			    sql="select * from Lop";
+		    case 6:
+			System.out.println("In danh sách lớp");
+			System.out.println();
 			    
-				    fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
-				    new SQLPerforment().prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
-                            scan.nextLine();
-			    break;
+			sql="select * from Lop";
+			    
+			fieldsNameToPrint=new String[]{"MaLop","MaMH","NamHoc","HocKy","MaGV"};
+			new SQLPerforment(stmt).prtQueryRs(sql,fieldsNameToPrint,fieldsNameToPrint);
+			scan.nextLine();
+			break;
 
 
-			case 7:
-			    System.out.println("Quit");
-		System.out.println("**************************************");
-				System.out.println();
-			    break;
-			}
-		}while(choice!=7);
-	    
-	//***********************************************
-	}catch(SQLException se){
-	    //Handle errors for JDBC
-	    se.printStackTrace();
-	}catch(Exception e){
-	    //Handle errors for Class.forName
-	    e.printStackTrace();
-	}finally{
-	    //finally block used to close resources
-	    try{
-		if(stmt!=null)
-		    conn.close();
-	    }catch(SQLException se){
-	    }// do nothing
-	    try{
-		if(conn!=null)
-		    conn.close();
-	    }catch(SQLException se){
-		se.printStackTrace();
-	    }//end finally try
-	}//end try
-	//*******************************************************
+		    case 7:
+			System.out.println("Quit");
+			System.out.println("**************************************");
+			System.out.println();
+			break;
+		    }
+	    }while(choice!=7);
+//scan.close();
     }
 }

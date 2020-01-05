@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Menu{
 
-        public static String[] mainMenu= new String[]{"-----------------Menu-----------------","Mục 1: Quản lý môn học","Mục 2: Quản lý giáo viên","Mục 3: Quản lý sinh viên","Mục 4: Quản lý lớp","Mục 5: Quản lý điểm","Mục 6: Quản trị hệ thống","Mục 7: Quit"};
+    public static String[] mainMenu= new String[]{"-----------------Menu-----------------","Mục 1: Quản lý môn học","Mục 2: Quản lý giáo viên","Mục 3: Quản lý sinh viên","Mục 4: Quản lý lớp","Mục 5: Quản lý điểm","Mục 6: Quản trị hệ thống","Mục 7: Quit"};
     
     public static String[] menuQuanLyMonHoc=new String[]{"Quan ly mon hoc","Chọn 1: Thêm môn học mới","Chọn 2: Sửa thông tin môn học","Chọn 3: In danh sách môn học","Chọn 4: Quit"};
     
@@ -31,12 +31,15 @@ public class Menu{
 	do
 	    {
 		System.out.print("Please choose one: ");
-		choice=scan.nextInt();
-scan.nextLine();
+		    String choiceString=scan.nextLine();
+		    if(choiceString.length()!=1||choiceString.charAt(0)>option+'0'||choiceString.charAt(0)<'1')
+                            choice=-1; else choice=choiceString.charAt(0)-'0';
+
 		if(choice>option||choice<1)
 		    System.out.println("Ban da nhap sai, moi ban nhap lai!");
 	    }while(choice>option||choice<1);
-		System.out.println("**************************************");
+	System.out.println("**************************************");
+//scan.close();
 	return choice;
     }
     
