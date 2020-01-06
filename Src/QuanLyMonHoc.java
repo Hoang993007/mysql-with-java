@@ -8,6 +8,7 @@ import db_choose.*;
 import check_exists.*;
 import menu.*;
 import sqlPerforment.*;
+import getInput.*;
 
 public class QuanLyMonHoc{
     
@@ -52,25 +53,12 @@ public class QuanLyMonHoc{
 			    TenMH=scan.nextLine();
 			    if(TenMH.equals("")) break try_case_1;
 
-
-
-			    
-			    //do{
-			    //	try{
 			    System.out.print("So tin chi: ");
-			    SoTC=scan.nextInt();
-			    scan.nextLine();
-			    //	}catch(Exception e){
-			    //scan.nextLine();//đọc xâu thừa mà ở kia do là nextInt nên ko đọc
-			    //System.out.println("Error\n");
-			    //System.out.print("Want to continue? (y): ");
-			    //if(scan.nextLine().equals("y")
-			    //}
-			    //}while(1==1);
+			    GetInput getSoTC=new GetInput();
+			    getSoTC.getInt();
+			    if(getSoTC.getError()==1) break try_case_1;
+			    else SoTC=getSoTC.getIntValue();
 
-
-
-				    
 			    sql="insert into MonHoc "
 				+"values('"+MaMH+"','"+TenMH+"',"+SoTC+")";
 
@@ -145,18 +133,13 @@ public class QuanLyMonHoc{
 				    
 			    System.out.print("\nUpdate so tin chi? (y/n): ");
 
-
-
-				    
 			    if(scan.nextLine().equals("y")){
 				System.out.print("So tin chi: ");
-				SoTC=scan.nextInt();
-				check=scan.nextLine();
+				GetInput getSoTC=new GetInput();
+				getSoTC.getInt();
+				if(getSoTC.getError()==1) break try_case_2;
+				else SoTC=getSoTC.getIntValue();
 
-
-
-
-					
 				sql="update MonHoc set SoTC="+SoTC+" where MaMH='"+UDMaMH+"'";
 				try{
 				    stmt.executeUpdate(sql);

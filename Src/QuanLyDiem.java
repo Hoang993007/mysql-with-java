@@ -8,6 +8,7 @@ import db_choose.*;
 import check_exists.*;
 import menu.*;
 import sqlPerforment.*;
+import getInput.*;
 
 //trong cả chương trình sẽ chỉ có một đối tượng QuanLyDiem duy nhat duoc tao. Nói giống như là chỉ có 1 thằng duy nhất được làm công việc quản lý điểm thôi
 
@@ -82,7 +83,7 @@ public class QuanLyDiem{
 	String sql=new String();
 	String MaSV=new String();
 	String ISClass=new String();//INSERT CLASS
-	double Diem;
+	double Diem=0;
 	
 	Scanner scan=new Scanner(System.in);
 
@@ -117,17 +118,12 @@ public class QuanLyDiem{
 			}else  if(choice==2&&new CheckExists(stmt).checkExists("SinhVienLop","MaSV='"+MaSV+"' and "+"MaLop='"+ISClass+"' and Diem IS NULL")==1){
 			    System.out.println("\nDiem haven't inputed\n");
 			}else{
-
-
-
-			    //Fix like with SoTC
 			    System.out.print("Diem: ");
-			    Diem=scan.nextInt();
-			    scan.nextLine();
-
-
-				    
-						
+			    GetInput getDiem=new GetInput();
+			    getDiem.getDouble();
+			    if(getDiem.getError()==1) break try_case_12;
+			    else Diem=getDiem.getDoubleValue();
+			    
 			    sql="update SinhVienLop set Diem='"+Diem+"' where MaSV='"+MaSV+"' and MaLop='"+ISClass+"'";
 			    try{
 				stmt.executeUpdate(sql);

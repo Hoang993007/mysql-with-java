@@ -8,6 +8,7 @@ import db_choose.*;
 import check_exists.*;
 import menu.*;
 import sqlPerforment.*;
+import getInput.*;
 
 public class QuanLyLop{
 
@@ -68,19 +69,12 @@ public class QuanLyLop{
 				    NamHoc=scan.nextLine();
 				    if(NamHoc.equals("")) break try_case_1;
 
-
-
-
-				    //FIX INTERGER, RE INPUT
 				    System.out.print("Hoc ky: ");
-				    HocKy=scan.nextInt();
-				    check=scan.nextLine();//CLEAR BUFFER
-
-
-
-
-
-					    
+				    GetInput getHocKy=new GetInput();
+				    getHocKy.getInt();
+				    if(getHocKy.getError()==1) break try_case_1;
+				    else HocKy=getHocKy.getIntValue();
+				    
 				    sql="insert into Lop "
 					+"values('"+MaLop+"','"+MaMH+"','"+NamHoc+"',"+HocKy+",'"+MaGV+"')";
 				    try{
@@ -172,16 +166,12 @@ public class QuanLyLop{
 			    System.out.print("\nUpdate hoc ky? (y/n): ");
 			    if(scan.nextLine().equals("y")){
 
-
-
-				//FIx like with SoTC
 				System.out.print("Hoc ky: ");
-				HocKy=scan.nextInt();
-				check=scan.nextLine();//CLEAR BUFFER
-
-
-
-					    
+				GetInput getHocKy=new GetInput();
+				getHocKy.getInt();
+				if(getHocKy.getError()==1) break try_case_1;
+				else HocKy=getHocKy.getIntValue();
+				
 				sql="update Lop set HocKy="+HocKy+" where MaLop='"+UDMaLop+"'";
 				try{
 				    stmt.executeUpdate(sql);
