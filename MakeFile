@@ -16,8 +16,10 @@ JFLAGS_SET_STORE_PATH=-d
 JDBC_CLASSPATH	=used_package/mysql-connector-java-8.0.17.jar
 CURRENT_CLASSPATH	=.
 PACKAGE_CLASSPATH	=Package/
+
 SRCDIR		=Src/
 PACKAGEDIR	=Package/
+PACKAGE_NAME	=Package
 
 MAIN_CLASSDIR	=Package/main/
 MAIN_CLASSDIR_SPECIAL_RUN=main.
@@ -26,7 +28,7 @@ MAIN_CLASSDIR_SPECIAL_RUN=main.
 
 #Get a list of all the java source files name have in Src directory
 #Example: Main.java -> Src/Main.java
-SRC	= $(wildcard Src/*.java)
+SRC	= $(wildcard $(SRCDIR)*.java)
 
 #get Package/main/Main.java
 _MAINCLASS	= $(wildcard $(MAIN_CLASSDIR)*.class)
@@ -41,11 +43,14 @@ MAINCLASS	=$(patsubst $(MAIN_CLASSDIR)%.class,%, $(_MAINCLASS))
 #đánh dấu phòng trường hợp trùng tên => Dùng .PHONY
 
 #Recomplie file Package if there are any change in Src file
-$(PACKAGE_CLASSPATH):$(SRCDIR)
+$(PACKAGE_NAME):$(SRC)
 	$(JC) $(JFLAGS_SET_STORE_PATH) $(PACKAGE_CLASSPATH) $(SRC)
+#ở đay cả package phụ thuộc vào sorce chứ ko phải từng cái bên trong package phụ thuộc vào sorce
+
+
 
 #run the program
-run:$(PACKAGE_CLASSPATH)
+run:$(PACKAGE_NAME)
 #	emacs&
 	$(JVM) $(JFLAGS_SET_CLASSPATH) $(CURRENT_CLASSPATH):$(JDBC_CLASSPATH):$(PACKAGE_CLASSPATH) $(MAIN_CLASSDIR_SPECIAL_RUN)$(MAINCLASS)
 

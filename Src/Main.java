@@ -32,6 +32,7 @@ class Main{//do not let QuanLy be a public class
 	    int choice;
 	    do{
 		choice=new Menu().getChoice(Menu.mainMenu);
+
 		switch(choice){
 		case 1:
 		    new QuanLyMonHoc(stmt).exec();
@@ -56,6 +57,7 @@ class Main{//do not let QuanLy be a public class
 		    break;
 		}
 	    }while(choice!=7);
+
 	    //***********************************************
 	    //ko cần SQLException ở đây vì ko có câu lệnh truy vấn nào được thực hiện ở đây
 	}catch(Exception e){
