@@ -169,7 +169,7 @@ public class QuanLyLop{
 				System.out.print("Hoc ky: ");
 				GetInput getHocKy=new GetInput();
 				getHocKy.getInt();
-				if(getHocKy.getError()==1) break try_case_1;
+				if(getHocKy.getError()==1) break try_case_2;
 				else HocKy=getHocKy.getIntValue();
 				
 				sql="update Lop set HocKy="+HocKy+" where MaLop='"+UDMaLop+"'";

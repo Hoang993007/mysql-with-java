@@ -6,19 +6,19 @@ import java.util.Scanner;
 
 public class Menu{
 
-    public static final String[] mainMenu= new String[]{"-----------------Menu-----------------","Mục 1: Quản lý môn học","Mục 2: Quản lý giáo viên","Mục 3: Quản lý sinh viên","Mục 4: Quản lý lớp","Mục 5: Quản lý điểm","Mục 6: Quản trị hệ thống","Mục 7: Quit"};
+    public static String[] mainMenu= new String[]{"-----------------Menu-----------------","Mục 1: Quản lý môn học","Mục 2: Quản lý giáo viên","Mục 3: Quản lý sinh viên","Mục 4: Quản lý lớp","Mục 5: Quản lý điểm","Mục 6: Quản trị hệ thống","Muc 7: Menu mo rong","Mục 8: Quit"};
     
-    public static final String[] menuQuanLyMonHoc=new String[]{"Quan ly mon hoc","Chọn 1: Thêm môn học mới","Chọn 2: Sửa thông tin môn học","Chọn 3: In danh sách môn học","Chọn 4: Quit"};
+    public static String[] menuQuanLyMonHoc=new String[]{"Quan ly mon hoc","Chọn 1: Thêm môn học mới","Chọn 2: Sửa thông tin môn học","Chọn 3: In danh sách môn học","Chọn 4: Quit"};
     
-    public static final String[] menuQuanLyGiaoVien=new String[]{"Quan ly giao vien","Chọn 1: Thêm hồ sơ giáo viên","Chọn 2: Sửa thông tin giáo viên","Chọn 3: In danh sách giáo viên","Chọn 4: Tìm kiếm giáo viên","Chọn 5: Quit"};
+    public static String[] menuQuanLyGiaoVien=new String[]{"Quan ly giao vien","Chọn 1: Thêm hồ sơ giáo viên","Chọn 2: Sửa thông tin giáo viên","Chọn 3: In danh sách giáo viên","Chọn 4: Tìm kiếm giáo viên","Chọn 5: Quit"};
     
-    public static final String[] menuQuanLySinhVien=new String[]{"Quan ly sinh vien","Chọn 1: Thêm hồ sơ sinh viên","Chọn 2: Sửa thông tin sinh viên","Chọn 3: Tìm kiếm sinh viên","Chon 4: Quit"};
+    public static String[] menuQuanLySinhVien=new String[]{"Quan ly sinh vien","Chọn 1: Thêm hồ sơ sinh viên","Chọn 2: Sửa thông tin sinh viên","Chọn 3: Tìm kiếm sinh viên","Chon 4: Quit"};
     
-    public static final String[] menuQuanLyLop=new String[]{"Quan ly lop","Chọn 1: Tạo lớp mới","Chọn 2: Sửa đổi thông tin lớp","Chọn 3: Bổ sung sinh viên vào lớp","Chọn 4: Loại bỏ sinh viên khỏi lớp","Chọn 5: Hủy lớp","Chọn 6: In danh sách lớp","Chọn 7: Quit"};
+    public static String[] menuQuanLyLop=new String[]{"Quan ly lop","Chọn 1: Tạo lớp mới","Chọn 2: Sửa đổi thông tin lớp","Chọn 3: Bổ sung sinh viên vào lớp","Chọn 4: Loại bỏ sinh viên khỏi lớp","Chọn 5: Hủy lớp","Chọn 6: In danh sách lớp","Chọn 7: Quit"};
     
-    public static final String[] menuQuanLyDiem=new String[]{"Quan ly diem","Chọn 1: Nhập điểm","Chọn 2: Sửa điểm","Chọn 3: In bảng điểm cho lớp","Chọn 4: In bảng điểm cho sinh viên","Chọn 5: Quit"};
+    public static String[] menuQuanLyDiem=new String[]{"Quan ly diem","Chọn 1: Nhập điểm","Chọn 2: Sửa điểm","Chọn 3: In bảng điểm cho lớp","Chọn 4: In bảng điểm cho sinh viên","Chọn 5: Quit"};
     
-    public static final String[] menuQuanTriHeThong=new String[]{"Quan tri he thong","Chọn 1: Sao lưu dữ liệu","Chọn 2: Phục hồi dữ liệu","Chọn 3: Quit"};
+    public static String[] menuQuanTriHeThong=new String[]{"Quan tri he thong","Chọn 1: Sao lưu dữ liệu","Chọn 2: Phục hồi dữ liệu","Chọn 3: Quit"};
 
     private int choice;
 
