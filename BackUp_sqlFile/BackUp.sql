@@ -37,7 +37,7 @@ CREATE TABLE `GiaoVien` (
 
 LOCK TABLES `GiaoVien` WRITE;
 /*!40000 ALTER TABLE `GiaoVien` DISABLE KEYS */;
-INSERT INTO `GiaoVien` VALUES ('','','',''),('abcxtuv','Ma Van','Tai','Tu nhien'),('cnsjij','Tam Tam','Tam','xA HOI'),('GV001','sdf','Trung Duc','DHBKHN'),('GV002','Nguyen','Van A','DHBKHN'),('GV69','John','Weak','WWE'),('s','','',''),('vhdbjd','Tam Tam','Tam','Xa Hoi');
+INSERT INTO `GiaoVien` VALUES ('GV001','Phuong','Nguyen Hong','SoICT'),('GV002','Duc','Nguyen Huu','SoICT'),('GV003','Huong','Le Thanh','SoICT');
 /*!40000 ALTER TABLE `GiaoVien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `Lop` (
 
 LOCK TABLES `Lop` WRITE;
 /*!40000 ALTER TABLE `Lop` DISABLE KEYS */;
-INSERT INTO `Lop` VALUES ('L001','MH001','0000-0000',1,'GV001');
+INSERT INTO `Lop` VALUES ('L001','MH001','2019',1,'GV001'),('L002','MH002','2019',1,'GV002'),('L003','MH003','2019',1,'GV003');
 /*!40000 ALTER TABLE `Lop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +93,7 @@ CREATE TABLE `MonHoc` (
 
 LOCK TABLES `MonHoc` WRITE;
 /*!40000 ALTER TABLE `MonHoc` DISABLE KEYS */;
-INSERT INTO `MonHoc` VALUES ('090909','Math I',1),('1','NULL',2),('123456','Khoa hoc toi pham',4),('696969','090909',2),('909090','Hoc nua hoc mai',2),('969696','Khoa hoc toi pham',3),('asdfsd','null',1),('ddddd','asdfasdfasdf',3),('MH001','MonHoc1',1),('MH002','MonHoc2',1),('MH003','MonHoc2',2),('MH004','MonHoc2',1),('MH005','MonHoc3',2),('MH006','MonHoc4',5),('MH007','MonHoc6',3),('MH008','MonHoc1',1),('MH009','MonHoc4',2),('MH010','MonHoc6',3),('MH012','MonHoc12',3),('MH013','x',2),('MH015','MonHoc15',2),('MH323','Toan Hoc',2),('MH333','Uong bia',3),('sdf','sdf',0),('sdfs','sdfs',0),('sdfsdf','sdfsd',0),('sdfsdfsdfs','sfsdfsdf',0),('sfsdfs','sdfsdfs',0),('SFSDFSDF','SDFSDFSD',2),('sfsfsdf','sdfsdfsdf',1);
+INSERT INTO `MonHoc` VALUES ('MH001','Tin Hoc Dai Cuong',4),('MH002','Co So Du Lieu',3),('MH003','Tri Tue Nhan Tao',3);
 /*!40000 ALTER TABLE `MonHoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `SinhVien` (
 
 LOCK TABLES `SinhVien` WRITE;
 /*!40000 ALTER TABLE `SinhVien` DISABLE KEYS */;
-INSERT INTO `SinhVien` VALUES ('SV001','Nguyen','Minh Trang','1999-03-12','Ha Noi'),('SV002','Truong','Cong Toan','1999-11-23','Thanh Hoa'),('SV003','Nguyen','Bao Duc','1999-11-11','Ha Noi');
+INSERT INTO `SinhVien` VALUES ('SV001','Nguyen Van','A','0220-01-01','Ha Noi'),('SV002','Nguyen Van','B','0220-01-02','Ha Noi'),('SV003','Nguyen Van','C','0220-01-03','Ha Noi'),('SV004','Pham Thi','D','0220-01-04','Ha Noi');
 /*!40000 ALTER TABLE `SinhVien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `SinhVienLop` (
 
 LOCK TABLES `SinhVienLop` WRITE;
 /*!40000 ALTER TABLE `SinhVienLop` DISABLE KEYS */;
-INSERT INTO `SinhVienLop` VALUES ('SV001','L001',10),('SV002','L001',10),('SV003','L001',NULL);
+INSERT INTO `SinhVienLop` VALUES ('SV001','L001',7),('SV001','L002',7),('SV001','L003',7),('SV002','L001',6),('SV002','L002',6),('SV002','L003',6),('SV003','L001',9),('SV003','L002',9),('SV004','L003',8);
 /*!40000 ALTER TABLE `SinhVienLop` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-06  0:02:04
+-- Dump completed on 2020-01-06 18:15:22
