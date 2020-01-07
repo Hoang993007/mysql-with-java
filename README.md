@@ -10,11 +10,7 @@ Package: I put all packages contain of .class files here.
 
 Src: My source code, contain .java files.
 
-original cuoiKi_sqlFile: The original database structure which my teacher gave me.
-
 used_package: it contain mysql-connector-java-8.0.17.jar package which is used for JDBC.
-
-Note_when_write_code: My nodes I wrote down while I make this project, It's all about code.
 
 MakeFile: a make file I had made to run faster
 
@@ -26,9 +22,9 @@ Preserve File: I save some file that maybe I will need in the future
 
 ~$ cd Src
 
-~$ javac -d ../Package/ SQLPerforment.java CheckExists.java Menu.java QuanLy.java QuanLyDiem.java QuanLyGiaoVien.java QuanLyLop.java QuanLyMonHoc.java QuanLySinhVien.java QuanTriHeThong.java DB_CHOOSE.java
+~$ javac -d ../Package/ SQLPerforment.java CheckExists.java Menu.java Main.java QuanLyDiem.java QuanLyGiaoVien.java QuanLyLop.java QuanLyMonHoc.java QuanLySinhVien.java QuanTriHeThong.java DB_CHOOSE.java
 
-~$ java -cp .:used_package/mysql-connector-java-8.0.17.jar:Package/ quanLy.QuanLy
+~$ java -cp .:used_package/mysql-connector-java-8.0.17.jar:Package/ main.Main
 #Note that If you want to set multiple classpaths in java in linex, then you need to separate each CLASSPATH by a colon (:).
 
 @OR I had made a make file here
